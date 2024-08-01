@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         //flip
-        if(inputVec.x < 0)
+        /*if(inputVec.x < 0)
         {
             transform.localScale = new Vector3(-1,1,1);
         }
@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-
+*/
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position+ nextVec);
     }
