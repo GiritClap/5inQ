@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     Rigidbody2D rigid;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -17,6 +17,16 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //flip
+        if(inputVec.x < 0)
+        {
+            transform.localScale = new Vector3(-1,1,1);
+        }
+        else if(inputVec.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position+ nextVec);
     }

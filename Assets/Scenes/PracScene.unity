@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -223,9 +223,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8493470991528748404, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
-      propertyPath: speed
-      value: 10
+    - target: {fileID: 2434698374274663135, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434698374274663135, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3868578438567152573, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -267,26 +271,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7612031430438115937, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
-      propertyPath: m_FlipX
+    - target: {fileID: 7985293956547037694, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7612031430438115937, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
-      propertyPath: m_Color.b
-      value: 0.990566
-      objectReference: {fileID: 0}
-    - target: {fileID: 7612031430438115937, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
-      propertyPath: m_Color.g
-      value: 0.45550445
-      objectReference: {fileID: 0}
-    - target: {fileID: 7612031430438115937, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
-      propertyPath: m_Color.r
-      value: 0.43454072
-      objectReference: {fileID: 0}
-    - target: {fileID: 7612031430438115937, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8507269219538176622, guid: 934713663e3c95543b8a0e110bbbefa7, type: 3}
       propertyPath: m_Name
       value: OriPlayer
