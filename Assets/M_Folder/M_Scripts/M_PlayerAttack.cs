@@ -11,8 +11,11 @@ public class M_PlayerAttack : MonoBehaviour
     public float coolTime = 0.75f;
     public float timer;
 
+    SpriteRenderer spriteRenderer;
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         for (int i = 0; i < attackPos.Length; i++)
         {
             attackPos[i].SetActive(false);
@@ -48,20 +51,10 @@ public class M_PlayerAttack : MonoBehaviour
             //up right 4
             attackPos[4].SetActive(true);
         }
-        else if (inputVec.x == 1 && inputVec.y == 0)
-        {
-            //right 3
-            attackPos[3].SetActive(true);
-        }
         else if ((inputVec.x < 1 && inputVec.x > 0) && (inputVec.y > -1 && inputVec.y < 0))
         {
             //down right 2
             attackPos[2].SetActive(true);
-        }
-        else if (inputVec.x == -1 && inputVec.y == 0)
-        {
-            //left 7
-            attackPos[7].SetActive(true);
         }
         else if ((inputVec.x > -1 && inputVec.x < 0) && (inputVec.y < 1 && inputVec.y > 0))
         {
@@ -73,20 +66,30 @@ public class M_PlayerAttack : MonoBehaviour
             //down left 0
             attackPos[0].SetActive(true);
         }
-        else if (inputVec.x == 0 && inputVec.y == 1)
+        else if ((inputVec.x == -1 && inputVec.y == 0) || !spriteRenderer.flipX)
+        {
+            //left 7
+            attackPos[7].SetActive(true);
+        }
+        else if ((inputVec.x == 1 && inputVec.y == 0) || spriteRenderer.flipX)
+        {
+            //right 3
+            attackPos[3].SetActive(true);
+        }
+        /*else if (inputVec.x == 0 && inputVec.y == 1)
         {
             //up 5
             attackPos[5].SetActive(true);
-        }
-        else if (inputVec.x == 0 && inputVec.y == -1)
+        }*/
+        /*else if (inputVec.x == 0 && inputVec.y == -1)
         {
             //down 1
             attackPos[1].SetActive(true);
-        }
-        else if (inputVec.x == 0 && inputVec.y == 0)
+        }*/
+        /*else if (inputVec.x == 0 && inputVec.y == 0)
         {
             attackPos[1].SetActive(true);
-        }
+        }*/
 
 
         yield return new WaitForSeconds(0.1f);
