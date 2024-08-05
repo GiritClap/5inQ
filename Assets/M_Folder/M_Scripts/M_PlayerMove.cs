@@ -38,11 +38,11 @@ public class M_PlayerMove : MonoBehaviour
     {
         if(inputVec.magnitude > 0)
         {
-            anim.SetBool("isFly", true);
+            anim.SetBool("isWalk", true);
         }
         else
         {
-            anim.SetBool("isFly", false);
+            anim.SetBool("isWalk", false);
 
         }
 
