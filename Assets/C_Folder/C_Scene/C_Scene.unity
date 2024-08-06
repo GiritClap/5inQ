@@ -215,7 +215,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1855584662
+--- !u!1001 &1528045039
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -223,6 +223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 249695266708191967, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1706241193273189640, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -237,11 +241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3608619390376305921, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3608619390376305921, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3608619390376305921, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -275,14 +279,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4362033248514410914, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 668d64a284d6b1246b3514f8280f8844, type: 3}
     - target: {fileID: 7930167016881416520, guid: e6db62779b3df3b49809232aa78f57b5, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 32623f03d16f0c843ae8452365cbd051, type: 2}
+      objectReference: {fileID: 9100000, guid: cf81b3ec4d316a946836ab5a23f13172, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -293,4 +293,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 430623772}
-  - {fileID: 1855584662}
+  - {fileID: 1528045039}
