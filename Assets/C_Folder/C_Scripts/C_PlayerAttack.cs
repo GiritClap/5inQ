@@ -34,7 +34,7 @@ public class C_PlayerAttack : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 StartCoroutine("Attack");
-                Debug.Log("ぞし");
+                //Debug.Log("ぞし");
             }
         }
 
@@ -62,53 +62,51 @@ public class C_PlayerAttack : MonoBehaviour
         if ((inputVec.x < 1 && inputVec.x > 0) && (inputVec.y < 1 && inputVec.y > 0))
         {
             //up right 4
-            anim.SetTrigger("Attack1");
+            anim.SetTrigger("tongueAttackUp");
             attackPos[4].SetActive(true);
         }
         else if ((inputVec.x < 1 && inputVec.x > 0) && (inputVec.y > -1 && inputVec.y < 0))
         {
             //down right 2
-            anim.SetTrigger("Attack3");
+            anim.SetTrigger("tongueAttackDown");
             attackPos[2].SetActive(true);
         }
         else if ((inputVec.x > -1 && inputVec.x < 0) && (inputVec.y < 1 && inputVec.y > 0))
         {
             //up left 6
-            anim.SetTrigger("Attack1");
+            anim.SetTrigger("tongueAttackUp");
             attackPos[6].SetActive(true);
         }
         else if ((inputVec.x > -1 && inputVec.x < 0) && (inputVec.y > -1 && inputVec.y < 0))
         {
             //down left 0
-            anim.SetTrigger("Attack3");
+            anim.SetTrigger("tongueAttackDown");
             attackPos[0].SetActive(true);
         }
         else if ((inputVec.x == -1 && inputVec.y == 0) || !spriteRenderer.flipX)
         {
             //left 7
-            anim.SetTrigger("Attack2");
+            anim.SetTrigger("tongueAttackMid");
             attackPos[7].SetActive(true);
         }
         else if ((inputVec.x == 1 && inputVec.y == 0) || spriteRenderer.flipX)
         {
             //right 3
-            anim.SetTrigger("Attack2");
+            anim.SetTrigger("tongueAttackMid");
             attackPos[3].SetActive(true);
         }
-        /*else if (inputVec.x == 0 && inputVec.y == 1)
+        else if (inputVec.x == 0 && inputVec.y == 1)
         {
             //up 5
+            anim.SetTrigger("tongueAttackUp");
             attackPos[5].SetActive(true);
-        }*/
-        /*else if (inputVec.x == 0 && inputVec.y == -1)
+        }
+        else if (inputVec.x == 0 && inputVec.y == -1)
         {
             //down 1
+            anim.SetTrigger("tongueAttackDown");
             attackPos[1].SetActive(true);
-        }*/
-        /*else if (inputVec.x == 0 && inputVec.y == 0)
-        {
-            attackPos[1].SetActive(true);
-        }*/
+        }
 
 
         yield return new WaitForSeconds(0.7f);
@@ -126,11 +124,13 @@ public class C_PlayerAttack : MonoBehaviour
 
         if (spriteRenderer.flipX)
         {
+            anim.SetTrigger("teethAttack");
             attackPos[4].SetActive(true);
             attackPos[2].SetActive(true);
         }
         else if (!spriteRenderer.flipX)
         {
+            anim.SetTrigger("teethAttack");
             attackPos[6].SetActive(true);
             attackPos[0].SetActive(true);
         }
