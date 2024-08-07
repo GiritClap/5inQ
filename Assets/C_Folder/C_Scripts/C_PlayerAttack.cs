@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class C_PlayerAttack : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class C_PlayerAttack : MonoBehaviour
     public float timer1;
     public float timer2;
 
+    public int level = 0;
+
+    public Slider powerGauge;
+    public Image fillColor;
+    float maxGauge = 3.0f;
+
     SpriteRenderer spriteRenderer;
     Animator anim;
 
@@ -19,6 +26,8 @@ public class C_PlayerAttack : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        powerGauge.maxValue = maxGauge;
+        powerGauge.value = maxGauge;
         for (int i = 0; i < attackPos.Length; i++)
         {
             attackPos[i].SetActive(false);
@@ -28,6 +37,15 @@ public class C_PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (level == 2)
+        {
+            powerGauge.gameObject.SetActive(true);
+        }
+        else
+        {
+            powerGauge.gameObject.SetActive(false);
+        }
+
         timer1 += Time.deltaTime;
         if (timer1 > coolTime)
         {
@@ -44,8 +62,17 @@ public class C_PlayerAttack : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 StartCoroutine("SpecialAttack");
-                Debug.Log("ぞし2");
+                //Debug.Log("ぞし2");
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Level"))
+        {
+            level=2;
+            collision.gameObject.SetActive(false);
         }
     }
 
