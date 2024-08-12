@@ -19,6 +19,11 @@ public class C_PlayerAttack : MonoBehaviour
     public Image fillColor;
     float maxGauge = 3.0f;
 
+    bool doSpecial1 = false;
+    bool doSpecial2 = false;
+    bool charging = false;
+    bool canUseSpecialAttack = true; // SpecialAttack 상태
+
     SpriteRenderer spriteRenderer;
     Animator anim;
     C_PlayerMove playerMove;
@@ -27,7 +32,7 @@ public class C_PlayerAttack : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        playerMove = GetComponent<C_PlayerMove>(); // C_PlayerMove 스크립트 가져오기
+        playerMove = GetComponent<C_PlayerMove>();
         powerGauge.maxValue = maxGauge;
         powerGauge.value = maxGauge;
         for (int i = 0; i < attackPos.Length; i++)
@@ -48,7 +53,7 @@ public class C_PlayerAttack : MonoBehaviour
         }
 
         timer1 += Time.deltaTime;
-        if (timer1 > coolTime)
+        if (timer1 > coolTime && !doSpecial1 && !doSpecial2)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -57,11 +62,39 @@ public class C_PlayerAttack : MonoBehaviour
         }
 
         timer2 += Time.deltaTime;
-        if (timer2 > coolTime && level == 2)
+        if (timer2 > coolTime && level == 2 && canUseSpecialAttack)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButton(1))
             {
-                StartCoroutine(SpecialAttack());
+                StartCoroutine("SpecialAttack");
+            }
+        }
+
+        if (doSpecial2 == false)
+        {
+            powerGauge.value += Time.deltaTime;
+            if (charging && powerGauge.value == maxGauge)
+            {
+                charging = false;
+                fillColor.color = Color.yellow;
+                canUseSpecialAttack = true; // 게이지가 최대치로 돌아왔을 때 SpecialAttack을 다시 사용
+            }
+        }
+
+        if (level == 2 && !charging && canUseSpecialAttack)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                SpecialAttack2();
+            }
+        }
+
+        if (Input.GetMouseButtonUp(1) || charging)
+        {
+            doSpecial2 = false;
+            for (int i = 0; i < attackPos.Length; i++)
+            {
+                attackPos[i].SetActive(false);
             }
         }
     }
@@ -70,7 +103,7 @@ public class C_PlayerAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Level"))
         {
-            level = 2;
+            level++;
             collision.gameObject.SetActive(false);
         }
     }
@@ -83,7 +116,7 @@ public class C_PlayerAttack : MonoBehaviour
     IEnumerator Attack()
     {
         timer1 = 0;
-        playerMove.enabled = false; // 이동 스크립트 비활성화
+        playerMove.enabled = false;
 
         if ((inputVec.x < 1 && inputVec.x > 0) && (inputVec.y < 1 && inputVec.y > 0))
         {
@@ -161,6 +194,42 @@ public class C_PlayerAttack : MonoBehaviour
             attackPos[i].SetActive(false);
         }
 
-        playerMove.enabled = true; // 이동 스크립트 활성화
+        playerMove.enabled = true;
+    }
+
+    void SpecialAttack2()
+    {
+        doSpecial2 = true;
+
+        powerGauge.value -= Time.deltaTime;
+        if (powerGauge.value <= 0f)
+        {
+            doSpecial2 = false;
+            charging = true;
+            fillColor.color = Color.black;
+            canUseSpecialAttack = false;
+            for (int i = 0; i < attackPos.Length; i++)
+            {
+                attackPos[i].SetActive(false);
+            }
+        }
+        if (spriteRenderer.flipX)
+        {
+            attackPos[4].SetActive(true);
+            attackPos[3].SetActive(true);
+            attackPos[2].SetActive(true);
+            attackPos[6].SetActive(false);
+            attackPos[7].SetActive(false);
+            attackPos[0].SetActive(false);
+        }
+        else if (!spriteRenderer.flipX)
+        {
+            attackPos[6].SetActive(true);
+            attackPos[7].SetActive(true);
+            attackPos[0].SetActive(true);
+            attackPos[4].SetActive(false);
+            attackPos[3].SetActive(false);
+            attackPos[2].SetActive(false);
+        }
     }
 }
