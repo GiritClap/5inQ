@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public float speed;
     public Vector2 home;
+    public float enemyHp;
+
 
     public float atkCooltime = 4;
     public float atkDelay;
