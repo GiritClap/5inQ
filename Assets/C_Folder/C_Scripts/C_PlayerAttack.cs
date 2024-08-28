@@ -15,6 +15,8 @@ public class C_PlayerAttack : MonoBehaviour
 
     public int level = 0;
 
+    public Image[] specialAttackImages;
+
     public Slider powerGauge;
     public Image fillColor;
     float maxGauge = 3.0f;
@@ -46,6 +48,11 @@ public class C_PlayerAttack : MonoBehaviour
         if (level == 2)
         {
             powerGauge.gameObject.SetActive(true);
+
+            foreach (var image in specialAttackImages)
+            {
+                image.color = Color.yellow;
+            }
         }
         else
         {
