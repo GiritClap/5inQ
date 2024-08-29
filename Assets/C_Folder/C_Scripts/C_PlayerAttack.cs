@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -8,100 +7,74 @@ public class C_PlayerAttack : MonoBehaviour
 {
     public Vector2 inputVec;
     public GameObject[] attackPos;
-
     public float coolTime = 0.75f;
-    public float timer1;
-    public float timer2;
 
     public int level = 0;
-
     public Image[] specialAttackImages;
+    private int StarcurrentIndex;
+    public Text SpecialAttackCount;
+    public Image SpecialAImg;
 
-    public Slider powerGauge;
-    public Image fillColor;
-    float maxGauge = 3.0f;
+    private int c=0;
 
-    bool doSpecial1 = false;
-    bool doSpecial2 = false;
-    bool charging = false;
-    bool canUseSpecialAttack = true; // SpecialAttack 상태
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
+    private C_PlayerMove playerMove;
 
-    SpriteRenderer spriteRenderer;
-    Animator anim;
-    C_PlayerMove playerMove;
+    private float timer1;
+    private float timer2;
+
+    private bool canUseSpecialAttack = true;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         playerMove = GetComponent<C_PlayerMove>();
-        powerGauge.maxValue = maxGauge;
-        powerGauge.value = maxGauge;
-        for (int i = 0; i < attackPos.Length; i++)
+
+        foreach (var pos in attackPos)
         {
-            attackPos[i].SetActive(false);
+            pos.SetActive(false);
         }
+
+        foreach (Image img in specialAttackImages)
+        {
+            img.enabled = false;
+        }
+
+        StarcurrentIndex = specialAttackImages.Length - 1;
     }
 
     void Update()
     {
         if (level == 2)
         {
-            powerGauge.gameObject.SetActive(true);
-
             foreach (var image in specialAttackImages)
             {
-                image.color = Color.yellow;
+                image.enabled = true;
             }
-        }
-        else
-        {
-            powerGauge.gameObject.SetActive(false);
+            SpecialAImg.gameObject.SetActive(true);
         }
 
         timer1 += Time.deltaTime;
-        if (timer1 > coolTime && !doSpecial1 && !doSpecial2)
+        if (timer1 > coolTime && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartCoroutine(Attack());
-            }
+            StartCoroutine(Attack());
         }
 
         timer2 += Time.deltaTime;
-        if (timer2 > coolTime && level == 2 && canUseSpecialAttack)
+        if (timer2 > coolTime && level == 2 && canUseSpecialAttack && Input.GetMouseButtonDown(1))
         {
-            if (Input.GetMouseButton(1))
+            ++c;
+            if (StarcurrentIndex >= 0)
             {
-                StartCoroutine("SpecialAttack");
+                specialAttackImages[StarcurrentIndex].color = Color.white;
+                StartCoroutine(SpecialAttack());
+                StarcurrentIndex--;
             }
-        }
-
-        if (doSpecial2 == false)
-        {
-            powerGauge.value += Time.deltaTime;
-            if (charging && powerGauge.value == maxGauge)
+            if(c==3)
             {
-                charging = false;
-                fillColor.color = Color.yellow;
-                canUseSpecialAttack = true; // 게이지가 최대치로 돌아왔을 때 SpecialAttack을 다시 사용
-            }
-        }
-
-        if (level == 2 && !charging && canUseSpecialAttack)
-        {
-            if (Input.GetMouseButton(1))
-            {
-                SpecialAttack2();
-            }
-        }
-
-        if (Input.GetMouseButtonUp(1) || charging)
-        {
-            doSpecial2 = false;
-            for (int i = 0; i < attackPos.Length; i++)
-            {
-                attackPos[i].SetActive(false);
+                StartCoroutine(ResetStarcurrentIndex());
             }
         }
     }
@@ -125,32 +98,38 @@ public class C_PlayerAttack : MonoBehaviour
         timer1 = 0;
         playerMove.enabled = false;
 
-        if ((inputVec.x < 1 && inputVec.x > 0) && (inputVec.y < 1 && inputVec.y > 0))
+        if (inputVec.x < 1 && inputVec.x > 0)
         {
-            anim.SetTrigger("tongueAttackUp");
-            attackPos[4].SetActive(true);
+            if (inputVec.y < 1 && inputVec.y > 0)
+            {
+                anim.SetTrigger("tongueAttackUp");
+                attackPos[4].SetActive(true);
+            }
+            else if (inputVec.y > -1 && inputVec.y < 0)
+            {
+                anim.SetTrigger("tongueAttackDown");
+                attackPos[2].SetActive(true);
+            }
         }
-        else if ((inputVec.x < 1 && inputVec.x > 0) && (inputVec.y > -1 && inputVec.y < 0))
+        else if (inputVec.x > -1 && inputVec.x < 0)
         {
-            anim.SetTrigger("tongueAttackDown");
-            attackPos[2].SetActive(true);
+            if (inputVec.y < 1 && inputVec.y > 0)
+            {
+                anim.SetTrigger("tongueAttackUp");
+                attackPos[6].SetActive(true);
+            }
+            else if (inputVec.y > -1 && inputVec.y < 0)
+            {
+                anim.SetTrigger("tongueAttackDown");
+                attackPos[0].SetActive(true);
+            }
         }
-        else if ((inputVec.x > -1 && inputVec.x < 0) && (inputVec.y < 1 && inputVec.y > 0))
-        {
-            anim.SetTrigger("tongueAttackUp");
-            attackPos[6].SetActive(true);
-        }
-        else if ((inputVec.x > -1 && inputVec.x < 0) && (inputVec.y > -1 && inputVec.y < 0))
-        {
-            anim.SetTrigger("tongueAttackDown");
-            attackPos[0].SetActive(true);
-        }
-        else if ((inputVec.x == -1 && inputVec.y == 0) || !spriteRenderer.flipX)
+        else if (inputVec.x == -1 || !spriteRenderer.flipX)
         {
             anim.SetTrigger("tongueAttackMid");
             attackPos[7].SetActive(true);
         }
-        else if ((inputVec.x == 1 && inputVec.y == 0) || spriteRenderer.flipX)
+        else if (inputVec.x == 1 || spriteRenderer.flipX)
         {
             anim.SetTrigger("tongueAttackMid");
             attackPos[3].SetActive(true);
@@ -168,18 +147,18 @@ public class C_PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
 
-        for (int i = 0; i < attackPos.Length; i++)
+        foreach (var pos in attackPos)
         {
-            attackPos[i].SetActive(false);
+            pos.SetActive(false);
         }
 
-        playerMove.enabled = true; // 이동 스크립트 활성화
+        playerMove.enabled = true;
     }
 
     IEnumerator SpecialAttack()
     {
         timer2 = 0;
-        playerMove.enabled = false; // 이동 스크립트 비활성화
+        playerMove.enabled = false;
 
         if (spriteRenderer.flipX)
         {
@@ -187,7 +166,7 @@ public class C_PlayerAttack : MonoBehaviour
             attackPos[4].SetActive(true);
             attackPos[2].SetActive(true);
         }
-        else if (!spriteRenderer.flipX)
+        else
         {
             anim.SetTrigger("teethAttack");
             attackPos[6].SetActive(true);
@@ -196,47 +175,34 @@ public class C_PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
 
-        for (int i = 0; i < attackPos.Length; i++)
+        foreach (var pos in attackPos)
         {
-            attackPos[i].SetActive(false);
+            pos.SetActive(false);
         }
 
         playerMove.enabled = true;
     }
 
-    void SpecialAttack2()
+    IEnumerator ResetStarcurrentIndex()
     {
-        doSpecial2 = true;
+        float waitTime = 3f;
+        float elapsedTime = 0f;
 
-        powerGauge.value -= Time.deltaTime;
-        if (powerGauge.value <= 0f)
+        while (elapsedTime < waitTime)
         {
-            doSpecial2 = false;
-            charging = true;
-            fillColor.color = Color.black;
-            canUseSpecialAttack = false;
-            for (int i = 0; i < attackPos.Length; i++)
-            {
-                attackPos[i].SetActive(false);
-            }
+            elapsedTime += Time.deltaTime;
+            float remainingTime = Mathf.Max(0.1f, waitTime - elapsedTime);
+            SpecialAttackCount.text = Mathf.CeilToInt(remainingTime).ToString();
+            yield return null;
         }
-        if (spriteRenderer.flipX)
+
+        SpecialAttackCount.text = "";
+
+        StarcurrentIndex = 2;
+        foreach (Image img in specialAttackImages)
         {
-            attackPos[4].SetActive(true);
-            attackPos[3].SetActive(true);
-            attackPos[2].SetActive(true);
-            attackPos[6].SetActive(false);
-            attackPos[7].SetActive(false);
-            attackPos[0].SetActive(false);
+            img.color = Color.yellow;
         }
-        else if (!spriteRenderer.flipX)
-        {
-            attackPos[6].SetActive(true);
-            attackPos[7].SetActive(true);
-            attackPos[0].SetActive(true);
-            attackPos[4].SetActive(false);
-            attackPos[3].SetActive(false);
-            attackPos[2].SetActive(false);
-        }
+        c = 0;
     }
 }
