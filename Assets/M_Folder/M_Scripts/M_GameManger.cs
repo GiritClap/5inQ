@@ -63,6 +63,7 @@ public class M_GameManger : MonoBehaviour
         Debug.Log(player[0] + " " + player[1] + " " + player[2]);
         num = 0;
         Debug.Log(num);
+        SceneManager.LoadScene("M_FirstScene");
     }
 
     public void BBtn()
@@ -75,7 +76,7 @@ public class M_GameManger : MonoBehaviour
         Debug.Log(player[0] + " " + player[1] + " " + player[2]);
         num = 1;
         Debug.Log(num);
-
+        SceneManager.LoadScene("M_FirstScene");
     }
 
     public void CBtn()
@@ -88,7 +89,7 @@ public class M_GameManger : MonoBehaviour
         Debug.Log(player[0] + " " + player[1] + " " + player[2]);
         num = 2;
         Debug.Log(num);
-
+        SceneManager.LoadScene("M_FirstScene");
     }
 
     public void QuitBtn()
