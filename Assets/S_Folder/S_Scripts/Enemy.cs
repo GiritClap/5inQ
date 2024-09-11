@@ -11,8 +11,17 @@ public class Enemy : MonoBehaviour
     public float enemyHp;
 
 
-    public float atkCooltime = 4;
+    public float atkCooltime = 2;
     public float atkDelay;
+
+    public float distance;
+
+    public Transform boxpos;
+    public Vector2 boxSize;
+
+    public float attackRange;
+
+
 
 
     // Start is called before the first frame update
@@ -21,6 +30,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         home = transform.position;
+
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -33,6 +43,29 @@ public class Enemy : MonoBehaviour
         else
         {
             animator.SetFloat("Direction", 1);
+        }
+    }
+
+    public void Attack()
+    {
+        if(animator.GetFloat("Direction") == -1)
+        {
+            if (boxpos.localPosition.x > 0)
+                boxpos.localPosition = new Vector2(boxpos.localPosition.x * -1, boxpos.localPosition.y);
+        }
+        else
+        {
+            if (boxpos.localPosition.x < 0)
+                boxpos.localPosition = new Vector2(Mathf.Abs(boxpos.localPosition.x), boxpos.localPosition.y);
+        }
+
+        Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(boxpos.position, boxSize, 0);
+        foreach(Collider2D collider in collider2Ds)
+        {
+            if(collider.tag == "Player")
+            {
+                Debug.Log("damage");
+            }
         }
     }
     // Update is called once per frame
@@ -48,4 +81,6 @@ public class Enemy : MonoBehaviour
     }
 
     
+
+
 }

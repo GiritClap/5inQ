@@ -6,30 +6,37 @@ public class ReadyState : StateMachineBehaviour
 {
     Transform enemyTransform;
     Enemy enemy;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
     }
 
-   
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(enemy.atkDelay <= 0)
-        animator.SetTrigger("Attack");
-        if(Vector2.Distance(enemy.player.position, enemyTransform.position) > 1f)
-            animator.SetBool("isFollow", true);
+        // 적과 플레이어 간의 거리 계산
+        float distance = Vector2.Distance(enemyTransform.position, enemy.player.position);
 
-            enemy.DirectionEnemy(enemy.player.position.x, enemyTransform.position.x);
-        
+        // 공격 조건 확인
+        if (distance <= enemy.attackRange) // 5미터 이내에서 공격
+        {
+            if (enemy.atkDelay <= 0)
+            {
+                animator.SetTrigger("Attack"); // 공격 트리거 설정
+            }
+        }
+        else
+        {
+            animator.SetBool("isFollow", true); // 5미터 이상일 때 추적 상태로 전환
+        }
 
-
+        // 적의 방향 업데이트
+        enemy.DirectionEnemy(enemy.player.position.x, enemyTransform.position.x);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        // 상태 종료 시 필요한 작업 추가
     }
-
-   
 }
