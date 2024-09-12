@@ -16,7 +16,7 @@ public class IdleState : StateMachineBehaviour
     
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(Vector2.Distance(enemyTransform.position, enemy.player.position) <= 10)
+        if(Vector2.Distance(enemyTransform.position, enemy.player.position) <= enemy.distance)
             animator.SetBool("isFollow", true);
         
     }
