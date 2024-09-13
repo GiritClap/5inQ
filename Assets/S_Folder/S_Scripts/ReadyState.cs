@@ -7,10 +7,18 @@ public class ReadyState : StateMachineBehaviour
     Transform enemyTransform;
     Enemy enemy;
 
+    C_Rayser rayser;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
+        rayser = animator.GetComponent<C_Rayser>();
+
+        if (rayser == null)
+        {
+            Debug.LogError("C_Rayser component not found!");
+        }
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,6 +32,7 @@ public class ReadyState : StateMachineBehaviour
             if (enemy.atkDelay <= 0)
             {
                 animator.SetTrigger("Attack"); // 공격 트리거 설정
+                rayser.Rayser();
             }
         }
         else
