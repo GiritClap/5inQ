@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: obj
+    uniqueID: 2908206195
+    locked: 0
