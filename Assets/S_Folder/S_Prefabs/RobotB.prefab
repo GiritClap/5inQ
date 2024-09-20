@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5297759707749730932
 Transform:
   m_ObjectHideFlags: 0
@@ -153,3 +153,7 @@ MonoBehaviour:
   enemyHp: 3
   atkCooltime: 1
   atkDelay: 0
+  distance: 15
+  boxpos: {fileID: 0}
+  boxSize: {x: 0, y: 0}
+  attackRange: 0
