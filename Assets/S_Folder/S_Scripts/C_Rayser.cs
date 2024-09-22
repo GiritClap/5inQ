@@ -9,7 +9,7 @@ public class C_Rayser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = this.gameObject.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -22,4 +22,6 @@ public class C_Rayser : MonoBehaviour
     {
         animator.Play("Rayser");
     }
+
+    
 }

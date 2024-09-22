@@ -7,18 +7,13 @@ public class ReadyState : StateMachineBehaviour
     Transform enemyTransform;
     Enemy enemy;
 
-    C_Rayser rayser;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
-        rayser = animator.GetComponent<C_Rayser>();
-
-        if (rayser == null)
-        {
-            Debug.LogError("C_Rayser component not found!");
-        }
+       
+        
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -31,13 +26,21 @@ public class ReadyState : StateMachineBehaviour
         {
             if (enemy.atkDelay <= 0)
             {
-                animator.SetTrigger("Attack"); // 공격 트리거 설정
-                rayser.Rayser();
+                animator.SetTrigger("Attack"); // 공격 트리거 설정 여기가 공격이니까 
+                // 여기다가  대충
+                enemy.AttackStart();
+            }
+            else
+            {
+                enemy.AttackStop();
+
             }
         }
         else
         {
             animator.SetBool("isFollow", true); // 5미터 이상일 때 추적 상태로 전환
+            enemy.AttackStop();
+
         }
 
         // 적의 방향 업데이트
