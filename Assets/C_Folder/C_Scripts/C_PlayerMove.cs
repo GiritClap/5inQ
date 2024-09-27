@@ -18,6 +18,16 @@ public class C_PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        // Movement
+        Vector2 nextVec = inputVec * speed * Time.deltaTime;
+        rigid.MovePosition(rigid.position + nextVec);
+
+        // Adjust sortingOrder based on y-position
+        spriteRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 3);
+    }
+
     private void FixedUpdate()
     {
         //flip
