@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 502600798976207337}
   - component: {fileID: 617385815665156806}
   - component: {fileID: 1361079430994765715}
+  - component: {fileID: 4777271470967250580}
   m_Layer: 0
   m_Name: RobotC
   m_TagString: Enemy
@@ -158,6 +159,19 @@ MonoBehaviour:
   boxpos: {fileID: 0}
   boxSize: {x: 0, y: 0}
   attackRange: 5
+  rayser: {fileID: 6877772008501470014}
+--- !u!114 &4777271470967250580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434216040847240299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6147478cf454c4c8bb8b8fd5f65b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6877772008501470014
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,14 +183,13 @@ GameObject:
   - component: {fileID: 9166908114734323411}
   - component: {fileID: 7120368947364396450}
   - component: {fileID: 6170490403973381181}
-  - component: {fileID: 1005400822456784841}
   m_Layer: 0
   m_Name: Rayser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9166908114734323411
 Transform:
   m_ObjectHideFlags: 0
@@ -265,15 +278,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1005400822456784841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6877772008501470014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c6147478cf454c4c8bb8b8fd5f65b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

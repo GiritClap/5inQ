@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public float attackRange;
 
 
-    public GameObject rayser;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -82,14 +82,5 @@ public class Enemy : MonoBehaviour
 
     
 
-    public void AttackStart()
-    {
-        rayser.SetActive(true);
-    }
-
-    public void AttackStop()
-    {
-        rayser.SetActive(false);
-
-    }
+    
 }

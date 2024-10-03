@@ -6,11 +6,13 @@ public class ReadyState : StateMachineBehaviour
 {
     Transform enemyTransform;
     Enemy enemy;
+    C_Rayser ray;
 
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
+        ray = animator.GetComponent<C_Rayser>();
         enemyTransform = animator.GetComponent<Transform>();
        
         
@@ -28,18 +30,18 @@ public class ReadyState : StateMachineBehaviour
             {
                 animator.SetTrigger("Attack"); // 공격 트리거 설정 여기가 공격이니까 
                 // 여기다가  대충
-                enemy.AttackStart();
+                ray.AttackStart();
             }
             else
             {
-                enemy.AttackStop();
+                ray.AttackStop();
 
             }
         }
         else
         {
             animator.SetBool("isFollow", true); // 5미터 이상일 때 추적 상태로 전환
-            enemy.AttackStop();
+            ray.AttackStop();
 
         }
 
