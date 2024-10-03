@@ -47,5 +47,10 @@ public class PlayerHealth : MonoBehaviour
         // end Game
     }
 
-    
+    private void Update()
+    {
+        Debug.Log(hp);
+    }
+
+
 }

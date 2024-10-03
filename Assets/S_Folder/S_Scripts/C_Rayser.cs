@@ -6,6 +6,8 @@ public class C_Rayser : MonoBehaviour
 {
     Animator animator;
 
+
+    public GameObject rayser;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +20,18 @@ public class C_Rayser : MonoBehaviour
         
     }
 
-    public void Rayser()
+  
+
+    public void AttackStart()
     {
-        animator.Play("Rayser");
+        rayser.SetActive(true);
     }
 
-    
+    public void AttackStop()
+    {
+        rayser.SetActive(false);
+
+    }
+
+
 }
