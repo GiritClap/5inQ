@@ -2,8 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum EnemyType // 적 타입  선택
+{
+    RobotA,
+    RobotB,
+    RobotC,
+}
 public class Enemy : MonoBehaviour
 {
+
+    public EnemyType type;
+    
     Animator animator;
     public Transform player;
     public float speed;
@@ -24,8 +34,22 @@ public class Enemy : MonoBehaviour
 
     PlayerHealth playerHp;
 
+    public void ChangeEnemy()
+    {
+        switch(type)
+        {
+            case EnemyType.RobotA:
+                break;
+            case EnemyType.RobotB:
+                break;
+            case EnemyType.RobotC:
+                break;
 
-
+            default:
+                break;
+        }
+    }
+    
    
 
     // Start is called before the first frame update
@@ -71,6 +95,11 @@ public class Enemy : MonoBehaviour
             {
                 Debug.Log("damage");
                 playerHp.GetDamage(atkDamage);
+                if(type == EnemyType.RobotB)
+                {
+                    animator.SetTrigger("Die");
+                    StartCoroutine(DestroyAfterAnimation());  // 애니메이션이 끝난 후 객체 삭제
+                }
             }
         }
     }
@@ -88,7 +117,19 @@ public class Enemy : MonoBehaviour
         Debug.Log(atkDamage);
     }
 
-    
+    IEnumerator DestroyAfterAnimation()
+    {
+        // 애니메이션 상태를 가져옴
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-    
+        // 애니메이션의 길이만큼 대기
+        yield return new WaitForSeconds(stateInfo.length);
+
+        // 객체 삭제
+        Destroy(gameObject);
+    }
+
+
+
+
 }

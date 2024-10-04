@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 779509954608349569}
   - component: {fileID: 1534414064923423425}
   - component: {fileID: 6903570926546512031}
-  - component: {fileID: 6879618235700971084}
+  - component: {fileID: 8155282479312005855}
   m_Layer: 0
   m_Name: RobotB
   m_TagString: Enemy
@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1478848361788570501}
+  - {fileID: 1389024040752482224}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &779509954608349569
@@ -136,7 +136,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6879618235700971084
+--- !u!114 &8155282479312005855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,21 +145,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3031385873833456420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d41a50f02c19df6429b5f841edf6bbe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 270d5b6c3301107469ceabb72d6b0ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   player: {fileID: 0}
   speed: 10
   home: {x: 0, y: 0}
   enemyHp: 3
   atkCooltime: 2
   atkDelay: 0
-  atkDamage: 0
-  distance: 0
-  boxpos: {fileID: 1478848361788570501}
-  boxSize: {x: 10, y: 10}
+  atkDamage: 3
+  distance: 20
+  boxpos: {fileID: 1389024040752482224}
+  boxSize: {x: 15, y: 15}
   attackRange: 1
---- !u!1 &4819532705814015807
+--- !u!1 &4207177524299007783
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,24 +168,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1478848361788570501}
+  - component: {fileID: 1389024040752482224}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: B_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1478848361788570501
+--- !u!4 &1389024040752482224
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819532705814015807}
+  m_GameObject: {fileID: 4207177524299007783}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -0.13, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

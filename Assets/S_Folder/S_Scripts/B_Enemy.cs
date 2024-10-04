@@ -13,7 +13,7 @@ public class B_Enemy : MonoBehaviour
 
     public float atkCooltime = 2;
     public float atkDelay;
-    public int atkDamage;
+    public int atkDamage = 3;
 
     public float distance;
 
@@ -35,7 +35,6 @@ public class B_Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHp = player.GetComponent<PlayerHealth>();
         home = transform.position;
-        atkDamage = 3;
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -69,7 +68,7 @@ public class B_Enemy : MonoBehaviour
         {
             if (collider.tag == "Player")
             {
-                Debug.Log("damage");
+                Debug.Log(atkDamage);
                 playerHp.GetDamage(atkDamage);
             }
         }
