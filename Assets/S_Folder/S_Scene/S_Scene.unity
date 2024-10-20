@@ -229,15 +229,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477523717217303670, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3477523717217303670, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3538059053313469579, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_Name
       value: OriPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538059053313469579, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3538059053313469579, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_TagString
@@ -245,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.88
+      value: -75.7
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -308,6 +312,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
+--- !u!1 &1026890657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1345730172243755020, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+  m_PrefabInstance: {fileID: 1597193425954507967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1606858900
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +390,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
   m_PrefabInstance: {fileID: 816856730}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1811146228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6689321482609741389, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+  m_PrefabInstance: {fileID: 1597193425954507967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &318909085514216116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -450,6 +464,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2466931351717173, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1345730172243755020, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1361079430994765715, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
       propertyPath: player
       value: 
@@ -461,6 +483,18 @@ PrefabInstance:
     - target: {fileID: 2434216040847240299, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
       propertyPath: m_Name
       value: RobotC
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777271470967250580, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+      propertyPath: rayser_L
+      value: 
+      objectReference: {fileID: 1811146228}
+    - target: {fileID: 4777271470967250580, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+      propertyPath: rayser_R
+      value: 
+      objectReference: {fileID: 1026890657}
+    - target: {fileID: 5187258104137721304, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5897698734440793392, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,6 +534,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5897698734440793392, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6689321482609741389, guid: 1db596bb4f1d8ab44900984ebdeff69d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
