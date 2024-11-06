@@ -25,7 +25,7 @@ public class C_PlayerMove : MonoBehaviour
         rigid.MovePosition(rigid.position + nextVec);
 
         // Adjust sortingOrder based on y-position
-        spriteRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 3);
+        //spriteRenderer.sortingOrder = Mathf.RoundToInt(-transform.position.y * 3);
     }
 
     private void FixedUpdate()
