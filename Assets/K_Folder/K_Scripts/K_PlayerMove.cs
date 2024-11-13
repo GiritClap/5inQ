@@ -19,17 +19,7 @@ public class K_PlayerMove : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        //flip
-        /*if (inputVec.x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (inputVec.x > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-*/
+    {  
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
     }
