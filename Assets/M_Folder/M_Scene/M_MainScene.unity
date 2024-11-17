@@ -123,6 +123,88 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &129256949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129256951}
+  - component: {fileID: 129256950}
+  - component: {fileID: 129256952}
+  m_Layer: 0
+  m_Name: M_AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &129256950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129256949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3260fde79aa2f0548be88d361426c3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainBgm_1
+    clip: {fileID: 8300000, guid: e84ec5ce354444d438ae8990e1a789df, type: 3}
+    loop: 1
+    volume: 0.3
+  - name: MainBgm_2
+    clip: {fileID: 8300000, guid: bb44e36a964678d49b404597fa025974, type: 3}
+    loop: 1
+    volume: 0.3
+  - name: PunchSfx
+    clip: {fileID: 8300000, guid: 70fecf88e2ad8744aa81eec148a40714, type: 3}
+    loop: 0
+    volume: 0.6
+  - name: PunchKillSfx
+    clip: {fileID: 8300000, guid: d604f46d360e6c340852fcfebbb68946, type: 3}
+    loop: 0
+    volume: 0.6
+  - name: OnClickSfx
+    clip: {fileID: 8300000, guid: 556b271f03e467b4794aaa4db8afbf9d, type: 3}
+    loop: 0
+    volume: 0.6
+  - name: OffClickSfx
+    clip: {fileID: 8300000, guid: 831df112a945dac49b6df5c6e752f427, type: 3}
+    loop: 0
+    volume: 0.6
+--- !u!4 &129256951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129256949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 824.068, y: 571.38025, z: -5.2895145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &129256952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129256949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ec9e340a1e4c5469e97530cfaceb16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &173258216
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +375,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 129256952}
+        m_TargetAssemblyTypeName: M_ButtonClick, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OffClickSfx
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &178142767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +518,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 129256952}
+        m_TargetAssemblyTypeName: M_ButtonClick, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnClickSfx
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &198361417
@@ -1391,6 +1497,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 129256952}
+        m_TargetAssemblyTypeName: M_ButtonClick, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OffClickSfx
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1042362217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,6 +1927,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 129256952}
+        m_TargetAssemblyTypeName: M_ButtonClick, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnClickSfx
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1265361956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2018,6 +2148,7 @@ GameObject:
   - component: {fileID: 1566133743}
   - component: {fileID: 1566133742}
   - component: {fileID: 1566133741}
+  - component: {fileID: 1566133744}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2099,6 +2230,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1566133744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566133740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d73c32f02da4649b600e7f7eb939e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639265465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,6 +2568,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 129256952}
+        m_TargetAssemblyTypeName: M_ButtonClick, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnClickSfx
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1894055890
@@ -3006,6 +3161,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 129256952}
+        m_TargetAssemblyTypeName: M_ButtonClick, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnClickSfx
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2011443392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3308,3 +3475,4 @@ SceneRoots:
   - {fileID: 1905361536}
   - {fileID: 271368183}
   - {fileID: 931164908}
+  - {fileID: 129256951}
