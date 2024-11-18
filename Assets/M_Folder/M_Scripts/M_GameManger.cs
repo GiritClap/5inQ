@@ -60,9 +60,7 @@ public class M_GameManger : MonoBehaviour
             player[i] = false;
         }
         player[0] = true; // 0 = a, 1 = b, 2 = c
-        Debug.Log(player[0] + " " + player[1] + " " + player[2]);
         num = 0;
-        Debug.Log(num);
         SceneManager.LoadScene("M_FirstScene");
     }
 
@@ -73,9 +71,7 @@ public class M_GameManger : MonoBehaviour
             player[i] = false;
         }
         player[1] = true; // 0 = a, 1 = b, 2 = c
-        Debug.Log(player[0] + " " + player[1] + " " + player[2]);
         num = 1;
-        Debug.Log(num);
         SceneManager.LoadScene("M_FirstScene");
     }
 
@@ -86,9 +82,7 @@ public class M_GameManger : MonoBehaviour
             player[i] = false;
         }
         player[2] = true; // 0 = a, 1 = b, 2 = c
-        Debug.Log(player[0] + " " + player[1] + " " + player[2]);
         num = 2;
-        Debug.Log(num);
         SceneManager.LoadScene("M_FirstScene");
     }
 

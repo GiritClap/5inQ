@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 5681072701263000126}
   - component: {fileID: 3073405374938131203}
   m_Layer: 5
-  m_Name: ASkill
+  m_Name: A_Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 6310386577097339427}
   - component: {fileID: 5026489857403558687}
   m_Layer: 5
-  m_Name: ABasicIcon
+  m_Name: A_Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
