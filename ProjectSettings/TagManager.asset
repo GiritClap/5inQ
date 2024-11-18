@@ -46,3 +46,6 @@ TagManager:
   - name: obj
     uniqueID: 2908206195
     locked: 0
+  - name: Table
+    uniqueID: 2041629223
+    locked: 0
