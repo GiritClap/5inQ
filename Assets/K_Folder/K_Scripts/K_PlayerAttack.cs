@@ -16,13 +16,33 @@ public class K_PlayerAttack : MonoBehaviour
     private bool doSpecial1 = false;
     private bool doSpecial2 = false;
 
-    public float fadeTime = 0.5f;
-    public float reappearDelay = 0.1f; // 재등장 지연 시간
-    public float moveDistance = 5f; // 이동 거리
-    private SpriteRenderer spriteRenderer;
+    //레이저 공격 초안
+    public GameObject laserPrefab; // 레이저 프리팹
+    public Transform laserSpawnPoint; // 레이저 스폰 위치
+    public float laserSpeed = 10f; // 레이저 속도
+    public float laserDuration = 0.5f; // 레이저 지속 시간
+    public float laserCooldown = 1f; // 레이저 쿨타임
+    private float laserTimer = 0f;
+
     private Animator anim;
+    private bool canAttack = true;
+
+  
+    private SpriteRenderer spriteRenderer;
+    
     private bool isFading = false;
 
+
+    // 6방향 설정
+    private readonly Vector2[] directions = new Vector2[]
+    {
+        new Vector2(1, 0),   // 오른쪽
+        new Vector2(-1, 0),  // 왼쪽
+        new Vector2(1, 1),   // 대각선 오른쪽 위
+        new Vector2(1, -1),   // 대각선 오른쪽 아래
+        new Vector2(-1, 1),  // 대각선 왼쪽 위
+        new Vector2(-1, -1)  // 대각선 왼쪽 아래
+    };
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,14 +54,14 @@ public class K_PlayerAttack : MonoBehaviour
         timer1 += Time.deltaTime;
         timer2 += Time.deltaTime;
 
-        // 기본 공격 - 좌클릭으로 페이드 시작
-        if (timer1 > coolTime && !doSpecial1 && !doSpecial2)
+        laserTimer += Time.deltaTime;
+
+        if (laserTimer > laserCooldown && canAttack)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) // 좌클릭으로 레이저 발사
             {
-                StartCoroutine(Attack());
-                timer1 = 0f;
-                StartCoroutine(FadeAndMove()); // 페이드 및 이동 시작
+                StartCoroutine(FireLaser());
+                laserTimer = 0f; // 쿨타임 초기화
             }
         }
 
@@ -60,33 +80,60 @@ public class K_PlayerAttack : MonoBehaviour
         anim.SetBool("isSAttack", doSpecial2);
     }
 
-    private IEnumerator FadeAndMove()
+    private IEnumerator FireLaser()
     {
-        isFading = true;
-        float startAlpha = spriteRenderer.color.a;
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + new Vector3(moveDistance, 0f, 0f); // 목표 위치 설정
+        canAttack = false;
+        anim.SetTrigger("FireLaser"); // 레이저 발사 애니메이션 트리거
 
-        float elapsed = 0f;
+        // 마우스 위치를 가져와서 방향을 계산
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 위치
+        Vector2 direction = (mousePosition - (Vector2)transform.position).normalized; // 캐릭터와 마우스 사이의 방향
 
-        while (elapsed < fadeTime)
+        // 6방향 중 가장 가까운 방향을 선택
+        Vector2 closestDirection = GetClosestDirection(direction);
+
+        // 레이저의 시작 위치 설정 (캐릭터의 중앙에서 약간 앞쪽으로 설정)
+        Vector2 laserStartPosition = (Vector2)transform.position + closestDirection * 0.5f; // 캐릭터의 중앙에서 앞쪽으로 설정
+
+        // 레이저 인스턴스 생성
+        GameObject laser = Instantiate(laserPrefab, laserStartPosition, Quaternion.identity); // 레이저 초기 위치 설정
+
+        // 레이저의 회전 설정
+        float angle = Mathf.Atan2(closestDirection.y, closestDirection.x) * Mathf.Rad2Deg;
+        laser.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // 레이저 이동 처리 (Rigidbody2D를 사용)
+        Rigidbody2D rb = laser.GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / fadeTime;
-
-            // 페이드 아웃 (투명도 감소)
-            float alpha = Mathf.Lerp(startAlpha, 0f, t);
-            spriteRenderer.color = new Color(1, 1, 1, alpha);
-
-            // 천천히 목표 위치로 이동
-            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-
-            yield return null;
+            rb.velocity = closestDirection * laserSpeed; // 레이저 속도 적용
         }
 
-        // 완전 투명 상태에서 재등장 처리 시작
-        spriteRenderer.color = new Color(1, 1, 1, 0f); // 완전 투명
-        StartCoroutine(ReappearAfterDelay());
+        Destroy(laser, laserDuration); // 지속 시간 이후 레이저 삭제
+
+        yield return new WaitForSeconds(laserCooldown); // 쿨타임
+        canAttack = true;
+    }
+
+    private Vector2 GetClosestDirection(Vector2 direction)
+    {
+        // 가장 가까운 6방향을 선택하는 로직
+        float minAngleDiff = Mathf.Infinity;
+        Vector2 closestDirection = Vector2.zero;
+
+        foreach (var dir in directions)
+        {
+            // 현재 방향과 6방향 사이의 각도를 계산
+            float angleDiff = Mathf.Abs(Vector2.Angle(direction, dir));
+
+            if (angleDiff < minAngleDiff)
+            {
+                minAngleDiff = angleDiff;
+                closestDirection = dir;
+            }
+        }
+
+        return closestDirection;
     }
 
     private IEnumerator Attack()
@@ -111,20 +158,5 @@ public class K_PlayerAttack : MonoBehaviour
         doSpecial2 = false;
     }
 
-    private IEnumerator ReappearAfterDelay()
-    {
-        yield return new WaitForSeconds(reappearDelay);
-
-        // 다시 등장하면서 색상을 초기화하고 애니메이션 재개
-        spriteRenderer.color = Color.white;
-        anim.SetTrigger("Reappear");
-    }
-
-    public void resetAnim()
-    {
-        spriteRenderer.color = Color.white;
-        gameObject.SetActive(true);
-        isFading = false;
-        timer1 = 0f;
-    }
+   
 }
