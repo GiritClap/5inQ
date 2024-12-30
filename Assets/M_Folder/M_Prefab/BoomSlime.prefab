@@ -121,5 +121,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   moveSpeed: 5
-  explosionRange: 2
+  explosionRange: 2.44
   detectionRange: 15
