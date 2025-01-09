@@ -4,8 +4,9 @@ public class C_Rocket : MonoBehaviour
 {
     public Transform target; // 타겟 Transform (플레이어)
     public float rotateSpeed = 5f; // 회전 속도 (낮을수록 더 직선적)
-    public float moveSpeed = 10f; // 이동 속도
+    public float moveSpeed = 15f; // 이동 속도
     public int damage = 5; // 미사일의 데미지
+    public float lifetime = 5f; // 로켓이 사라질 시간 (초)
 
     private Rigidbody2D rb;
 
@@ -20,6 +21,9 @@ public class C_Rocket : MonoBehaviour
 
         // Rigidbody2D 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>();
+
+        // 지정된 시간 후에 로켓 파괴
+        Destroy(gameObject, lifetime);
     }
 
     void FixedUpdate()

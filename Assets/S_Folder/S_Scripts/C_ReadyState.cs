@@ -25,10 +25,10 @@ public class C_ReadyState : StateMachineBehaviour
             if (enemy.atkDelay <= 0)
             {
                 // 로켓 생성
-                if (enemy.type == EnemyType.RobotC)
-                {
-                    enemy.LaunchCRocket();
-                }
+                //if (enemy.type == EnemyType.RobotC)
+                //{
+                    //enemy.LaunchCRocket();
+                //}
 
                 // 공격 애니메이션 실행
                 animator.SetTrigger("Attack");
