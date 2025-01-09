@@ -568,13 +568,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a934e1cb4b7d5d8498cdde8ea300285f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sampleDialog:
-  - "\uB300\uCDA9 \uC5EC\uAE30\uB2E4\uAC00"
-  - "\uC2A4\uD06C\uB9BD\uD2B8 \uC9E0 \uBD80\uBD84\uC744 \uB123\uC5B4\uC8FC\uBA74"
-  - "\uC798 \uC801\uC6A9\uC774 \uB420 \uAC83\uC774\uB77C\uACE0 \uBD05\uB2C8\uB2E4"
-  - "\uBD84\uAE30 \uCC98\uB9AC\uB294 \uD604\uC7AC \uD558\uB4DC \uCF54\uB529\uC774\uB77C
-    \uCD94\uD6C4 \uC5C5\uB383 \uD544\uC694\uD569\uB2C8\uB2E4\uC694"
-  changeImgList:
+  dialogList:
+  - "\uD14C\uC2A4\uD2B8\uC6A9 \uC2A4\uD06C\uB9BD\uD2B8"
+  - "\uC785\uB2C8\uB2E4. \uC798 \uC791\uB3D9\uB418\uB294\uC9C0"
+  - "\uD655\uC778\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+  - "\uC798 \uB418\uB294\uAC70 \uAC19\uB124\uC694."
+  bgImgList:
   - {fileID: 21300000, guid: b80e9fda61c9ee04da59f5dc0cc2e35a, type: 3}
   - {fileID: 21300000, guid: 467d0a73705200a4ab80d5eb140cda22, type: 3}
   charList:
