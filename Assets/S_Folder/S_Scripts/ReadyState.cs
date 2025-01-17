@@ -11,10 +11,10 @@ public class ReadyState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
-       
+
         enemyTransform = animator.GetComponent<Transform>();
-       
-        
+
+
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,17 +28,14 @@ public class ReadyState : StateMachineBehaviour
             if (enemy.atkDelay <= 0)
             {
                 animator.SetTrigger("Attack"); // 공격 트리거 설정 여기가 공격이니까 
-                
-                
+
             }
-            
- 
-            
+
         }
         else
         {
             animator.SetBool("isFollow", true); // 5미터 이상일 때 추적 상태로 전환
-            
+
 
         }
 
