@@ -6594,7 +6594,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -30
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.78, y: 0.13999999, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -6614,7 +6614,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 0
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6624,7 +6624,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 4294967295
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6636,7 +6636,11 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 97785398b0275a74a8544a481114995a, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: fd0d8ccb7d6b85e49b6f1ba933fa9606, type: 2}
-  m_TileSpriteArray: []
+  m_TileSpriteArray:
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 026748d9fc4667f4685f9a2a4c04aa84, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 8ef8adcbf74fd694dbbaf968515170be, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 2
     m_Data:
@@ -7701,7 +7705,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &430623769
@@ -18846,7 +18850,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1204768840
@@ -18930,7 +18934,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1205172749
@@ -27092,7 +27096,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1692857658
@@ -34544,14 +34548,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 138342519614596999, guid: b34168050fee63e4988207441d7a23eb, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 138342519614596999, guid: b34168050fee63e4988207441d7a23eb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1872092981051798160, guid: b34168050fee63e4988207441d7a23eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.11
@@ -34595,10 +34591,6 @@ PrefabInstance:
     - target: {fileID: 4239235060719349240, guid: b34168050fee63e4988207441d7a23eb, type: 3}
       propertyPath: m_Name
       value: C_Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4239235060719349240, guid: b34168050fee63e4988207441d7a23eb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6018019597189491507, guid: b34168050fee63e4988207441d7a23eb, type: 3}
       propertyPath: SpecialAImg
