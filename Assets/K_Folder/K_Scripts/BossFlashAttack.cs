@@ -1,18 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class BossFlashAttack : MonoBehaviour
 {
     public Transform player;  // 플레이어의 Transform
     public Transform boss;    // 보스의 Transform
-    public float flashDamageRange = 90f; // 플레이어가 몇 도 이상으로 등지고 있어야 피해를 받지 않음
+    public float flashRange = 50f; // 섬광이 도달하는 최대 거리
+    public string hideTag = "Hide"; // 숨을 수 있는 오브젝트의 태그
+
+    public Image flashImage;  // 하얗게 변할 UI Image
+
+    public float flashDuration = 0.5f;  // 섬광 효과 지속 시간
+    public float flashDelay = 0.1f;    // 섬광이 시작되는 지연 시간
+    public float fadeDuration = 1f;    // 화면이 천천히 하얗게 변하는 시간
+    public float fadeBackDuration = 1f; // 화면이 천천히 원래대로 돌아오는 시간
 
     // 섬광 패턴 발동
     public void TriggerFlashAttack()
     {
         Debug.Log("섬광 패턴이 발동되었습니다!");
 
-        // 플레이어가 보스에게 등을 돌리고 있는지 확인
-        if (IsPlayerLookingAway())
+        // 플레이어가 Hide 오브젝트 뒤에 있는지 확인
+        if (IsPlayerBehindHideObject())
         {
             Debug.Log("플레이어가 섬광을 피했습니다.");
         }
@@ -20,23 +30,71 @@ public class BossFlashAttack : MonoBehaviour
         {
             Debug.Log("플레이어가 섬광에 맞았습니다!");
             // 플레이어에게 데미지 주기
+            StartCoroutine(FlashEffect());
         }
     }
 
-    // 플레이어가 보스에게 등을 돌리고 있는지 확인하는 함수
-    private bool IsPlayerLookingAway()
+    // 보스에서 플레이어 방향으로 레이캐스트를 쏘는 함수
+    private bool IsPlayerBehindHideObject()
     {
-        // 플레이어가 보고 있는 방향
-        Vector3 playerForward = player.forward;
-        // 보스의 위치에서 플레이어의 위치까지의 방향
-        Vector3 directionToBoss = (boss.position - player.position).normalized;
+        Vector2 directionToPlayer = (player.position - boss.position).normalized;
+        float distanceToPlayer = Vector2.Distance(boss.position, player.position);
 
-        // 플레이어가 보스와 반대 방향을 보고 있는지 확인
-        float angle = Vector3.Angle(playerForward, directionToBoss);
+        RaycastHit2D hit;
 
-        Debug.Log("플레이어와 보스 간의 각도: " + angle);
+        Debug.DrawRay(boss.position, directionToPlayer * distanceToPlayer, Color.red, 2f);
 
-        // 플레이어가 flashDamageRange 이상으로 보스에게 등을 돌리고 있으면 피할 수 있음
-        return angle > flashDamageRange;
+        hit = Physics2D.Raycast(boss.position, directionToPlayer, distanceToPlayer);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.CompareTag(hideTag))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // 화면 하얗게 처리하는 이펙트
+    private IEnumerator FlashEffect()
+    {
+        // 하얗게 화면을 덮기 시작
+        flashImage.enabled = true;
+
+        // 화면이 천천히 하얗게 변하게 하기 (Alpha 값 천천히 증가)
+        float elapsedTime = 0f;
+        Color flashColor = flashImage.color;
+
+        while (elapsedTime < fadeDuration)
+        {
+            flashColor.a = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+            flashImage.color = flashColor;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        flashColor.a = 1f; // 끝날 때 완전히 하얗게
+        flashImage.color = flashColor;
+
+        // 섬광 효과 지속 시간만큼 기다리기
+        yield return new WaitForSeconds(flashDuration);
+
+        // 화면이 천천히 원래대로 돌아오게 하기 (Alpha 값 천천히 감소)
+        elapsedTime = 0f;
+        while (elapsedTime < fadeBackDuration)
+        {
+            flashColor.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeBackDuration);
+            flashImage.color = flashColor;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        flashColor.a = 0f; // 끝날 때 완전히 투명하게
+        flashImage.color = flashColor;
+
+        // 화면을 원래 상태로 복귀
+        yield return new WaitForSeconds(flashDelay);
+
+        flashImage.enabled = false;
     }
 }
