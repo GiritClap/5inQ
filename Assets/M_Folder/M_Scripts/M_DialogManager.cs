@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class M_DialogManager : MonoBehaviour
@@ -43,7 +44,7 @@ public class M_DialogManager : MonoBehaviour
     }
 
     // 대화를 시작하는 메서드
-    public void StartDialog(List<string> dialogLines)
+    public void StartDialog(List<string> dialogLines, string name)
     {
         dialogQueue.Clear();
 
@@ -56,17 +57,17 @@ public class M_DialogManager : MonoBehaviour
         char_1.gameObject.SetActive(true);
         char_2.gameObject.SetActive(false);
 
-        DisplayNextLine();
+        DisplayNextLine(name);
     }
 
     // 다음 대사 출력
-    public void DisplayNextLine()
+    public void DisplayNextLine(string name)
     {
         if (isTyping) return; // 타이핑 중에는 무시
 
         if (dialogQueue.Count == 0)
         {
-            EndDialog();
+            EndDialog(name);
             return;
         }
 
@@ -90,11 +91,15 @@ public class M_DialogManager : MonoBehaviour
     }
 
     // 대화 종료
-    private void EndDialog()
+    private void EndDialog(string name)
     {
+        SceneManager.LoadScene(name);
+
         dialogPanel.SetActive(false);
         char_1.gameObject.SetActive(false);
         char_2.gameObject.SetActive(false);
+
+      
     }
 
     public void ChangeImage(Sprite image)

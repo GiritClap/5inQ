@@ -44,9 +44,14 @@ public class M_PlayerHealth : MonoBehaviour
         }
         else
         {
+
             anim.SetTrigger("Damage");
             hp = getDamagedHp;
             hpBar.value = hp;
+            Debug.Log("데미지 받음 : " + damage);
+            Debug.Log("남은 체력 : " + hp);
+
+
         }
     }
 

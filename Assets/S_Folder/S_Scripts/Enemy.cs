@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     public float attackRange;
 
-    PlayerHealth playerHp;
+    M_PlayerHealth playerHp;
 
     public void ChangeEnemy()
     {
@@ -60,9 +60,9 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerHp = player.GetComponent<PlayerHealth>();
+        playerHp = player.GetComponent<M_PlayerHealth>();
         home = transform.position;
-        atkDamage = 3;
+        atkDamage = 10;
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -80,6 +80,8 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
+        
+
         if (animator.GetFloat("Direction") == -1)
         {
             if (boxpos.localPosition.x > 0)
@@ -100,8 +102,8 @@ public class Enemy : MonoBehaviour
         {
             if (collider.tag == "Player")
             {
-                Debug.Log("damage");
-                playerHp.GetDamage(atkDamage);
+                Debug.Log("damage" + atkDamage);
+                playerHp.GetDamage(atkDamage);  
 
                 // B 공격
                 if (type == EnemyType.RobotB)
@@ -117,6 +119,14 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 01/23 문승준 추가 
+        if(player == null || playerHp == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerHp = player.GetComponent<M_PlayerHealth>();
+        }
+        //
+
         if (atkDelay >= 0)
             atkDelay -= Time.deltaTime;
 
@@ -125,7 +135,7 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("Die");
         }
 
-        Debug.Log(atkDamage);
+        //Debug.Log(atkDamage);   01/23 문승준 추가 
     }
 
     IEnumerator DestroyAfterAnimation()

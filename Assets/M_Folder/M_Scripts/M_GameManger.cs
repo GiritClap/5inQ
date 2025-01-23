@@ -40,7 +40,7 @@ public class M_GameManger : MonoBehaviour
 
     public void StartBtn()
     {
-        SceneManager.LoadScene("M_FirstScene");
+        SceneManager.LoadScene("M_DialogTest");
     }
 
     public void SelectBtn(GameObject selectPanel)
@@ -61,7 +61,8 @@ public class M_GameManger : MonoBehaviour
         }
         player[0] = true; // 0 = a, 1 = b, 2 = c
         num = 0;
-        SceneManager.LoadScene("M_FirstScene");
+
+        StartBtn();
     }
 
     public void BBtn()
@@ -72,7 +73,7 @@ public class M_GameManger : MonoBehaviour
         }
         player[1] = true; // 0 = a, 1 = b, 2 = c
         num = 1;
-        SceneManager.LoadScene("M_FirstScene");
+        StartBtn();
     }
 
     public void CBtn()
@@ -83,7 +84,7 @@ public class M_GameManger : MonoBehaviour
         }
         player[2] = true; // 0 = a, 1 = b, 2 = c
         num = 2;
-        SceneManager.LoadScene("M_FirstScene");
+        StartBtn();
     }
 
     public void QuitBtn()

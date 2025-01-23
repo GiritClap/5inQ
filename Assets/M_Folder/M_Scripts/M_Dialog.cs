@@ -7,6 +7,8 @@ public abstract class M_Dialog : MonoBehaviour
     public List<Sprite> bgImgList = new List<Sprite>();
     public List<Sprite> charList = new List<Sprite>();
 
+    public string nextSceneName;
+
     private int currentBgImageIndex = -1; // 현재 설정된 배경 이미지 인덱스 추적
     private int currentCharImageIndex = -1; // 현재 설정된 캐릭터 이미지 인덱스 추적
 
@@ -14,7 +16,7 @@ public abstract class M_Dialog : MonoBehaviour
     {
         if (dialogList.Count > 0)
         {
-            M_DialogManager.Instance.StartDialog(dialogList);
+            M_DialogManager.Instance.StartDialog(dialogList ,nextSceneName);
             ChangeImages();
         }
     }
@@ -23,7 +25,7 @@ public abstract class M_Dialog : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && M_DialogManager.Instance.dialogPanel.activeSelf)
         {
-            M_DialogManager.Instance.DisplayNextLine();
+            M_DialogManager.Instance.DisplayNextLine(nextSceneName);
             ChangeImages();
         }
     }

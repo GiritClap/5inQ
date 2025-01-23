@@ -12,7 +12,6 @@ public class M_FirstSceneManager : MonoBehaviour
     void Start()
     {
         curPlayerNum = M_GameManger.Instance.CurrentPlayer();
-        Debug.Log(curPlayerNum);
         switch(curPlayerNum)
         {
             case 0:
