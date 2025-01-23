@@ -5241,7 +5241,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0
-      minScalar: -9.46
+      minScalar: -13.69
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14792,7 +14792,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.8396226, g: 0.81189924, b: 0.81189924, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -14817,7 +14817,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14926,11 +14926,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.1
+      value: -13.5
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15072,11 +15072,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1367683426904161435, guid: 739562e3756a4e84bbe99a8bf5ec6273, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.81
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 1367683426904161435, guid: 739562e3756a4e84bbe99a8bf5ec6273, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.78
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 1367683426904161435, guid: 739562e3756a4e84bbe99a8bf5ec6273, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15196,6 +15196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle
       objectReference: {fileID: 0}
+    - target: {fileID: 5515542290577835812, guid: 3a421353edcb91940942b92f46e70815, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7062578457285497733, guid: 3a421353edcb91940942b92f46e70815, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.53
@@ -15292,6 +15296,10 @@ PrefabInstance:
     - target: {fileID: 5177916896600007265, guid: 5d23a2cdbbda09043b52bd5bc2f93077, type: 3}
       propertyPath: m_Name
       value: RobotA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177916896600007265, guid: 5d23a2cdbbda09043b52bd5bc2f93077, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7929771605027878954, guid: 5d23a2cdbbda09043b52bd5bc2f93077, type: 3}
       propertyPath: player
