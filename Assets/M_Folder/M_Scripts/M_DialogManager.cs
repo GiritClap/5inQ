@@ -93,11 +93,13 @@ public class M_DialogManager : MonoBehaviour
     // 대화 종료
     private void EndDialog(string name)
     {
-        SceneManager.LoadScene(name);
+        //SceneManager.LoadScene(name);
 
-        dialogPanel.SetActive(false);
-        char_1.gameObject.SetActive(false);
-        char_2.gameObject.SetActive(false);
+        M_LoadingSceneController.LoadScene(name);
+
+        //dialogPanel.SetActive(false);
+        //char_1.gameObject.SetActive(false);
+        //char_2.gameObject.SetActive(false);
 
       
     }

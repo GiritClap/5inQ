@@ -40,7 +40,8 @@ public class M_GameManger : MonoBehaviour
 
     public void StartBtn()
     {
-        SceneManager.LoadScene("M_DialogTest");
+        //SceneManager.LoadScene("M_DialogTest");
+        M_LoadingSceneController.LoadScene("M_DialogTest");
     }
 
     public void SelectBtn(GameObject selectPanel)
