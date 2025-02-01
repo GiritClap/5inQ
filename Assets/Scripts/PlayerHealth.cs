@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+         
             hp = getDamagedHp;
             hpBar.value = hp;
         }   
@@ -47,9 +49,5 @@ public class PlayerHealth : MonoBehaviour
         // end Game
     }
 
-    private void Update()
-    {
-    }
-
-
+ 
 }
