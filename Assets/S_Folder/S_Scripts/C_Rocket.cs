@@ -49,7 +49,7 @@ public class C_Rocket : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // 플레이어에 데미지를 주고 미사일을 파괴
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            M_PlayerHealth playerHealth = collision.GetComponent<M_PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.GetDamage(damage);

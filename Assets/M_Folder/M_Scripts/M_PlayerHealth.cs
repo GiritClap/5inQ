@@ -19,6 +19,10 @@ public class M_PlayerHealth : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        if(anim == null)
+        {
+            return;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,8 +48,13 @@ public class M_PlayerHealth : MonoBehaviour
         }
         else
         {
+            if(anim == null)
+            {
 
-            anim.SetTrigger("Damage");
+            } else
+            {
+                anim.SetTrigger("Damage");
+            }
             hp = getDamagedHp;
             hpBar.value = hp;
             Debug.Log("데미지 받음 : " + damage);

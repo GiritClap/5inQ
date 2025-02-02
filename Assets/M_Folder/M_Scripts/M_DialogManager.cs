@@ -52,7 +52,6 @@ public class M_DialogManager : MonoBehaviour
         {
             dialogQueue.Enqueue(line);
         }
-        Debug.Log(dialogQueue.Count);
         dialogPanel.SetActive(true);
         char_1.gameObject.SetActive(true);
         char_2.gameObject.SetActive(false);
