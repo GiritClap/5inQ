@@ -105,7 +105,7 @@ public class M_PlayerAttack : MonoBehaviour
             }
             //anim.SetBool("S_Attack_2", false);
             //StopCoroutine("SpecialAttack2");
-            Debug.Log("ぞし4");
+            //Debug.Log("ぞし4");
         }
     }
 
