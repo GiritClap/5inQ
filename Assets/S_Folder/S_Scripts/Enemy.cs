@@ -103,14 +103,18 @@ public class Enemy : MonoBehaviour
             if (collider.tag == "Player")
             {
                 Debug.Log("damage" + atkDamage);
-                playerHp.GetDamage(atkDamage);  
+                playerHp.GetDamage(atkDamage);
 
+                Debug.Log("B Die launched!"); 
+
+                /*
                 // B 공격
                 if (type == EnemyType.RobotB)
                 {
                     animator.SetTrigger("Die");
                     StartCoroutine(DestroyAfterAnimation());  // 애니메이션이 끝난 후 객체 삭제
                 }
+                */
 
                 
             }
@@ -138,6 +142,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log(atkDamage);   01/23 문승준 추가 
     }
 
+    /*
     IEnumerator DestroyAfterAnimation()
     {
         // 애니메이션 상태를 가져옴
@@ -149,6 +154,7 @@ public class Enemy : MonoBehaviour
         // 객체 삭제
         Destroy(gameObject);
     }
+    */
 
 
     public void LaunchCRocket()
@@ -157,15 +163,12 @@ public class Enemy : MonoBehaviour
         // 로켓 생성
         GameObject rocket = Instantiate(cRocket, transform.position, Quaternion.identity);
 
-        // 로켓이 플레이어를 추적하도록 설정
-        /*
-        C_Rocket rocketScript = rocket.GetComponent<C_Rocket>();
-        if (rocketScript != null)
-        {
-            rocketScript.SetTarget(player);
-        }
-        */
-        Debug.Log("C Rocket launched!");
+       
+    }
+
+    public void ObjectDestoy() //  신애리 추가
+    {
+        Destroy(animator.gameObject);
     }
 
 }

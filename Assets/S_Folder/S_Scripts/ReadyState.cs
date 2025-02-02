@@ -7,11 +7,12 @@ public class ReadyState : StateMachineBehaviour
     Transform enemyTransform;
     Enemy enemy;
 
+   
+
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
-
         enemyTransform = animator.GetComponent<Transform>();
 
 
@@ -28,7 +29,13 @@ public class ReadyState : StateMachineBehaviour
             if (enemy.atkDelay <= 0)
             {
                 animator.SetTrigger("Attack"); // 공격 트리거 설정 여기가 공격이니까 
+                // 신애리 추가
+                if (enemy.type == EnemyType.RobotB)
+                {
+                    animator.SetTrigger("Die");
+                    //Destroy(enemy.gameObject);
 
+                }
             }
 
         }
@@ -45,6 +52,13 @@ public class ReadyState : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 상태 종료 시 필요한 작업 추가
+        //신애리 추가
+
+        if (enemy.type == EnemyType.RobotB && animator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+        {
+            
+        }
     }
+
+   
 }
