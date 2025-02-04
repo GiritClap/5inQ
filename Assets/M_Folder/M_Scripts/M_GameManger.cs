@@ -63,7 +63,7 @@ public class M_GameManger : MonoBehaviour
         player[0] = true; // 0 = a, 1 = b, 2 = c
         num = 0;
 
-        StartBtn();
+        //StartBtn();
     }
 
     public void BBtn()
@@ -74,7 +74,7 @@ public class M_GameManger : MonoBehaviour
         }
         player[1] = true; // 0 = a, 1 = b, 2 = c
         num = 1;
-        StartBtn();
+        //StartBtn();
     }
 
     public void CBtn()
@@ -85,7 +85,7 @@ public class M_GameManger : MonoBehaviour
         }
         player[2] = true; // 0 = a, 1 = b, 2 = c
         num = 2;
-        StartBtn();
+        //StartBtn();
     }
 
     public void QuitBtn()
