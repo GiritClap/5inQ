@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class K_PlayerHealth : MonoBehaviour
+public class M_PlayerHealth : MonoBehaviour
 {
     public Slider hpBar;
     public int hp = 100;
@@ -44,7 +44,7 @@ public class K_PlayerHealth : MonoBehaviour
         }
         else
         {
-            anim.SetTrigger("isDamage");
+            anim.SetTrigger("Damage");
             hp = getDamagedHp;
             hpBar.value = hp;
         }
