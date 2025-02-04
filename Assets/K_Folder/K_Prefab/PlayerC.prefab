@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7541483484479863320}
   - component: {fileID: 5936643363474780390}
   - component: {fileID: 6577472018748578809}
-  - component: {fileID: 8552665192630696605}
+  - component: {fileID: 6582497546915324794}
   m_Layer: 0
   m_Name: PlayerC
   m_TagString: Player
@@ -252,7 +252,7 @@ MonoBehaviour:
   laserDuration: 0.5
   laserCooldown: 1
   C_Skill: {fileID: 3721116685324819008}
---- !u!114 &8552665192630696605
+--- !u!114 &6582497546915324794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 433108915512923720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c109842097497a749bc0d0bebdf48056, type: 3}
+  m_Script: {fileID: 11500000, guid: 7de328b58d0c4ad46b790f442b3eb053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 2639639665749698635}
