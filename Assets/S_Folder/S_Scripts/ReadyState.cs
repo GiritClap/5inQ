@@ -52,12 +52,7 @@ public class ReadyState : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //신애리 추가
-
-        if (enemy.type == EnemyType.RobotB && animator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
-        {
-            
-        }
+        
     }
 
    
