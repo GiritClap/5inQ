@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cRocket: {fileID: 0}
-  type: 0
+  type: 1
   player: {fileID: 0}
   speed: 10
   home: {x: 0, y: 0}
