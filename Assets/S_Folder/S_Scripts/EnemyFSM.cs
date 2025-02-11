@@ -7,7 +7,14 @@ public class EnemyFSM : MonoBehaviour
 {
     private Transform target;
     private NavMeshAgent navMeshAgent;
-    
+    public Transform player;
+
+
+    private void Start()
+    {
+        Setup(player);
+
+    }
     public void Setup(Transform target)
     {
         this.target = target;

@@ -25,6 +25,8 @@ public class M_PlayerAttack : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
 
+    public float atkDmg = 10;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
