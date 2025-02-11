@@ -56,7 +56,6 @@ public class K_PlayerAttack : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) // 좌클릭으로 레이저 발사
             {
-                StartCoroutine(FireLaser());
                 StartCoroutine(Attack());
                 laserTimer = 0f; // 쿨타임 초기화
             }
@@ -91,26 +90,6 @@ public class K_PlayerAttack : MonoBehaviour
             Debug.Log("C_Skill 이미지가 활성화되었습니다!");
             isCSkillActive = true; // 플래그 설정
         }
-    }
-
-    private IEnumerator FireLaser()
-    {
-        canAttack = false;
-        anim.SetTrigger("FireLaser"); // 레이저 발사 애니메이션 트리거
-
-        // 레이저의 시작 위치 설정
-        Vector2 laserStartPosition = laserSpawnPoint.position;
-
-        // 레이저 인스턴스 생성
-        GameObject laser = Instantiate(laserPrefab, laserStartPosition, Quaternion.identity);
-
-        // 레이저를 캐릭터의 자식으로 설정
-        laser.transform.SetParent(transform);
-
-        Destroy(laser, laserDuration); // 지속 시간 이후 레이저 삭제
-
-        yield return new WaitForSeconds(laserCooldown); // 쿨타임
-        canAttack = true;
     }
 
     private IEnumerator Attack()
