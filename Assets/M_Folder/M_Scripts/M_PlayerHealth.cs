@@ -10,10 +10,19 @@ public class M_PlayerHealth : MonoBehaviour
 
     Animator anim;
 
+    private SpriteRenderer spriteRenderer;
+
+
+    public float invincibilityDuration = 0.2f; // 무적 지속 시간
+    public float blinkInterval = 0.05f; // 깜빡이는 간격
+
+    private bool isDead = false; // 적이 이미 죽었는지 체크
+    private bool isInvincible = false; // 무적 상태 체크
 
     private void Awake()
     {
         SetMaxHp(hp);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -53,7 +62,8 @@ public class M_PlayerHealth : MonoBehaviour
 
             } else
             {
-                anim.SetTrigger("Damage");
+                //anim.SetTrigger("Damage");
+                StartCoroutine(InvincibilityCoroutine());
             }
             hp = getDamagedHp;
             hpBar.value = hp;
@@ -69,5 +79,21 @@ public class M_PlayerHealth : MonoBehaviour
         // end Game
     }
 
+    private IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true; // 무적 활성화
+
+        float elapsed = 0f;
+        while (elapsed < invincibilityDuration)
+        {
+            spriteRenderer.color = new Color(1f, 0f, 0f, 1f); // 빨강 색
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 색
+            yield return new WaitForSeconds(blinkInterval);
+            elapsed += blinkInterval * 2;
+        }
+
+        isInvincible = false; // 무적 해제
+    }
 
 }
