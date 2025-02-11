@@ -9,6 +9,7 @@ TagManager:
   - Stair
   - Onefloor
   - Hide
+  - Attack
   layers:
   - Default
   - TransparentFX

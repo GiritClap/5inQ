@@ -36,7 +36,14 @@ public class Enemy : MonoBehaviour
     public float attackRange;
 
     M_PlayerHealth playerHp;
+    M_PlayerAttack playerAttack;
 
+    public float invincibilityDuration = 0.2f; // 무적 지속 시간
+    public float blinkInterval = 0.05f; // 깜빡이는 간격
+
+    private bool isDead = false; // 적이 이미 죽었는지 체크
+    private bool isInvincible = false; // 무적 상태 체크
+    private SpriteRenderer spriteRenderer;
     public void ChangeEnemy()
     {
         switch (type)
@@ -58,9 +65,11 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer 가져오기
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHp = player.GetComponent<M_PlayerHealth>();
+        playerAttack = player.transform.GetComponent<M_PlayerAttack>();
         home = transform.position;
         atkDamage = 10;
     }
@@ -105,7 +114,7 @@ public class Enemy : MonoBehaviour
                 Debug.Log("damage" + atkDamage);
                 playerHp.GetDamage(atkDamage);
 
-                Debug.Log("B Die launched!"); 
+                //Debug.Log("B Die launched!"); 
 
                 /*
                 // B 공격
@@ -134,11 +143,7 @@ public class Enemy : MonoBehaviour
         if (atkDelay >= 0)
             atkDelay -= Time.deltaTime;
 
-        if (enemyHp <= 0)
-        {
-            animator.SetTrigger("Die");
-        }
-
+       
         //Debug.Log(atkDamage);   01/23 문승준 추가 
     }
 
@@ -171,4 +176,51 @@ public class Enemy : MonoBehaviour
         Destroy(animator.gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Attack") && !isDead && !isInvincible) // 무적 아닐 때만 피격
+        {
+            OnDamaged(playerAttack.atkDmg);
+        }
+    }
+
+    void OnDamaged(float atkDmg)
+    {
+        Debug.Log("피격!");
+        enemyHp -= atkDmg;
+
+        if (enemyHp <= 0 && !isDead) // 중복 처리 방지
+        {
+            isDead = true;
+            animator.SetTrigger("Die");
+            //StartCoroutine(DestroyAfterAnimation());
+        }
+        else
+        {
+            StartCoroutine(InvincibilityCoroutine()); // 무적 & 깜빡이는 효과 시작
+        }
+    }
+
+    private IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true; // 무적 활성화
+
+        float elapsed = 0f;
+        while (elapsed < invincibilityDuration)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // 반투명
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 색
+            yield return new WaitForSeconds(blinkInterval);
+            elapsed += blinkInterval * 2;
+        }
+
+        isInvincible = false; // 무적 해제
+    }
+
+    /*private IEnumerator DestroyAfterAnimation()
+    {
+        yield return new WaitForSeconds(0.5f); // 애니메이션 길이만큼 기다림
+        Destroy(gameObject);
+    }*/
 }
