@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour
         {
             isDead = true;
             animator.SetTrigger("Die");
-            //StartCoroutine(DestroyAfterAnimation());
+            StartCoroutine(DestroyAfterAnimation());
         }
         else
         {
@@ -208,7 +208,7 @@ public class Enemy : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < invincibilityDuration)
         {
-            spriteRenderer.color = new Color(1f, 1f, 1f, 0.5f); // 반투명
+            spriteRenderer.color = new Color(1f, 0f, 0f, 1f); // 빨강 색
             yield return new WaitForSeconds(blinkInterval);
             spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // 원래 색
             yield return new WaitForSeconds(blinkInterval);
@@ -218,9 +218,9 @@ public class Enemy : MonoBehaviour
         isInvincible = false; // 무적 해제
     }
 
-    /*private IEnumerator DestroyAfterAnimation()
+    private IEnumerator DestroyAfterAnimation()
     {
         yield return new WaitForSeconds(0.5f); // 애니메이션 길이만큼 기다림
         Destroy(gameObject);
-    }*/
+    }
 }

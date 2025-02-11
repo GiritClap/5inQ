@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 2263242871356783476}
   - component: {fileID: 7698808578711641170}
   - component: {fileID: 7304714733593535709}
+  - component: {fileID: 9043604375767640647}
   m_Layer: 0
   m_Name: RobotC
   m_TagString: Enemy
@@ -452,7 +453,7 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 4
   home: {x: 0, y: 0}
-  enemyHp: 3
+  enemyHp: 50
   atkCooltime: 6
   atkDelay: 0
   atkDamage: 15
@@ -460,6 +461,53 @@ MonoBehaviour:
   boxpos: {fileID: 0}
   boxSize: {x: 0, y: 0}
   attackRange: 10
+  invincibilityDuration: 0.2
+  blinkInterval: 0.05
+--- !u!61 &9043604375767640647
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7397700547195928961}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.5, y: 4}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.5, y: 4}
+  m_EdgeRadius: 0
 --- !u!1 &8515025023630742655
 GameObject:
   m_ObjectHideFlags: 0
