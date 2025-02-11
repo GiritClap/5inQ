@@ -21,7 +21,7 @@ public class EnemyFSM : MonoBehaviour
 
     private void Update()
       {
-        //navMeshAgent.SetDestination(target.position);
+        navMeshAgent.SetDestination(target.position);
       }
     
 }

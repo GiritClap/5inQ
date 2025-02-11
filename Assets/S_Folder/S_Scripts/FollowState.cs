@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FollowState : StateMachineBehaviour
 {
@@ -11,8 +12,8 @@ public class FollowState : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
     }
-
     
+
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (Vector2.Distance(enemy.player.position, enemyTransform.position) > enemy.distance)
@@ -32,7 +33,13 @@ public class FollowState : StateMachineBehaviour
         enemy.DirectionEnemy(enemy.player.position.x, enemyTransform.position.x);
     }
 
-   
+    private Transform target;
+    private NavMeshAgent navMeshAgent;
+
+    
+
+
+
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
