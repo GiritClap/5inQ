@@ -5151,6 +5151,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7304714733593535709, guid: 739562e3756a4e84bbe99a8bf5ec6273, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1669359727}
     - target: {fileID: 7397700547195928961, guid: 739562e3756a4e84bbe99a8bf5ec6273, type: 3}
       propertyPath: m_Name
       value: RobotC
@@ -5194,11 +5198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 18.48
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4.32
       objectReference: {fileID: 0}
     - target: {fileID: 4449023786128107772, guid: f6757ea4c4e70594782134a50904eec9, type: 3}
       propertyPath: m_LocalPosition.z
