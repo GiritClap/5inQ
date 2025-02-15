@@ -12,7 +12,7 @@ public class FollowState : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
     }
-
+    
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -36,14 +36,14 @@ public class FollowState : StateMachineBehaviour
     private Transform target;
     private NavMeshAgent navMeshAgent;
 
-
+    
 
 
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        
     }
 
-
+    
 }

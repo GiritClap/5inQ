@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-
+        
 
         if (animator.GetFloat("Direction") == -1)
         {
@@ -102,6 +102,9 @@ public class Enemy : MonoBehaviour
                 boxpos.localPosition = new Vector2(Mathf.Abs(boxpos.localPosition.x), boxpos.localPosition.y);
         }
 
+        
+
+
 
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(boxpos.position, boxSize, 0);
         foreach (Collider2D collider in collider2Ds)
@@ -111,6 +114,18 @@ public class Enemy : MonoBehaviour
                 Debug.Log("damage" + atkDamage);
                 playerHp.GetDamage(atkDamage);
 
+                //Debug.Log("B Die launched!"); 
+
+                /*
+                // B 공격
+                if (type == EnemyType.RobotB)
+                {
+                    animator.SetTrigger("Die");
+                    StartCoroutine(DestroyAfterAnimation());  // 애니메이션이 끝난 후 객체 삭제
+                }
+                */
+
+                
             }
         }
     }
@@ -118,7 +133,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // 01/23 문승준 추가 
-        if (player == null || playerHp == null)
+        if(player == null || playerHp == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerHp = player.GetComponent<M_PlayerHealth>();
@@ -128,7 +143,7 @@ public class Enemy : MonoBehaviour
         if (atkDelay >= 0)
             atkDelay -= Time.deltaTime;
 
-
+       
         //Debug.Log(atkDamage);   01/23 문승준 추가 
     }
 
@@ -149,11 +164,11 @@ public class Enemy : MonoBehaviour
 
     public void LaunchCRocket()
     {
-
+        
         // 로켓 생성
         GameObject rocket = Instantiate(cRocket, transform.position, Quaternion.identity);
 
-
+       
     }
 
     public void ObjectDestoy() //  신애리 추가
