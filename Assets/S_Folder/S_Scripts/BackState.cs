@@ -12,10 +12,10 @@ public class BackState : StateMachineBehaviour
         enemyTransform = animator.GetComponent<Transform>();
     }
 
-    
+
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(Vector2.Distance(enemy.home, enemyTransform.position) < 1.0f || Vector2.Distance(enemyTransform.position, enemy.player.position)<= 10)
+        if (Vector2.Distance(enemy.home, enemyTransform.position) < 1.0f || Vector2.Distance(enemyTransform.position, enemy.player.position) <= 10)
         {
             animator.SetBool("isBack", false);
         }
@@ -26,11 +26,11 @@ public class BackState : StateMachineBehaviour
         }
     }
 
-    
+
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+
     }
 
-    
+
 }

@@ -7,7 +7,7 @@ public class ReadyState : StateMachineBehaviour
     Transform enemyTransform;
     Enemy enemy;
 
-   
+
 
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -52,8 +52,8 @@ public class ReadyState : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+
     }
 
-   
+
 }
