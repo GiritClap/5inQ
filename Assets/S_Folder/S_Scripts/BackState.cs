@@ -1,36 +1,42 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BackState : StateMachineBehaviour
 {
-    Transform enemyTransform;
-    Enemy enemy;
+    private Enemy enemy;
+    private NavMeshAgent agent;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
-        enemyTransform = animator.GetComponent<Transform>();
+        agent = enemy.GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(enemy.home); // 원래 자리로 이동
+        }
     }
 
-    
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(Vector2.Distance(enemy.home, enemyTransform.position) < 1.0f || Vector2.Distance(enemyTransform.position, enemy.player.position)<= 10)
+        float distanceToHome = Vector2.Distance(enemy.transform.position, enemy.home);
+
+        if (distanceToHome < 1.0f) // 홈에 도착하면 대기 상태로 변경
         {
             animator.SetBool("isBack", false);
+            animator.SetBool("isPattern", true);
         }
-        else
-        {
-            enemy.DirectionEnemy(enemy.home.x, enemyTransform.position.x);
-            enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, enemy.home, Time.deltaTime * enemy.speed);
-        }
+
+        enemy.DirectionEnemy(enemy.home.x, enemy.transform.position.x);
     }
 
-    
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        if (agent != null)
+        {
+            agent.ResetPath(); // 이동 경로 초기화
+        }
     }
-
-    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public enum EnemyType // 적 타입  선택
@@ -11,6 +12,8 @@ public enum EnemyType // 적 타입  선택
 }
 public class Enemy : MonoBehaviour
 {
+
+    private NavMeshAgent agent;
 
     public GameObject cRocket;
 
@@ -72,6 +75,17 @@ public class Enemy : MonoBehaviour
         playerAttack = player.transform.GetComponent<M_PlayerAttack>();
         home = transform.position;
         atkDamage = 10;
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false; // 2D 환경에서는 Y축 회전이 필요 없으므로 비활성화
+
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+
     }
 
     public void DirectionEnemy(float target, float baseobj)

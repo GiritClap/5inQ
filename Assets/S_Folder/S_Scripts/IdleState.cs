@@ -1,34 +1,42 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class IdleState : StateMachineBehaviour
 {
-    Transform enemyTransform;
-    Enemy enemy;
+    private Enemy enemy;
+    private NavMeshAgent agent;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
-        enemyTransform = animator.GetComponent<Transform>();
-    }
+        agent = enemy.GetComponent<NavMeshAgent>();
 
-
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (Vector2.Distance(enemyTransform.position, enemy.player.position) <= enemy.distance)
-            animator.SetBool("isFollow", true);
-        else
+        if (agent != null)
         {
-            animator.SetBool("isPattern", true);
+            agent.isStopped = true; // 대기 상태에서는 이동 중지
         }
     }
 
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        float distanceToPlayer = Vector2.Distance(enemy.transform.position, enemy.player.position);
+
+        if (distanceToPlayer <= enemy.distance)
+        {
+            animator.SetBool("isFollow", true); // 플레이어를 추적
+        }
+        else
+        {
+            animator.SetBool("isPattern", true); // 패턴 행동 시작
+        }
+    }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        if (agent != null)
+        {
+            agent.isStopped = false; // 이동 가능 상태로 변경
+        }
     }
-
-
 }

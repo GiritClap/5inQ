@@ -1,58 +1,66 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PatternState : StateMachineBehaviour
 {
-    Transform enemyTransform;
-    Enemy enemy;
-
-    float moveTimer;       // 이동 시간 타이머
-    Vector2 moveDirection; // 랜덤 이동 방향
-    float moveDuration = 2f; // 이동 지속 시간 (초 단위)
+    private Enemy enemy;
+    private NavMeshAgent agent;
+    private float moveTimer;
+    private float moveDuration = 2f; // 이동 지속 시간
+    private Vector2 randomTarget;    // 이동할 랜덤 위치
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
-        enemyTransform = animator.GetComponent<Transform>();
-        ResetMovement(); // 초기 랜덤 방향 설정
+        agent = enemy.GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            agent.isStopped = false; // 이동 시작
+        }
+
+        ResetMovement();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 이동 타이머 감소
         moveTimer -= Time.deltaTime;
 
-        // 적 이동
-        enemyTransform.Translate(moveDirection * enemy.speed * Time.deltaTime);
-
-        // 방향 설정에 따라 애니메이터에 전달
-        enemy.DirectionEnemy(enemyTransform.position.x + moveDirection.x, enemyTransform.position.x);
-
-        // 이동 시간이 끝났으면 새로운 방향 설정
+        // 이동 시간이 끝나면 새로운 랜덤 목적지 설정
         if (moveTimer <= 0)
         {
             ResetMovement();
         }
 
         // 플레이어가 가까워지면 추적 상태로 전환
-        if (Vector2.Distance(enemyTransform.position, enemy.player.position) <= enemy.distance)
+        if (Vector2.Distance(enemy.transform.position, enemy.player.position) <= enemy.distance)
         {
             animator.SetBool("isPattern", false);
-            animator.SetBool("isFollow", true);// 추적 상태로 전환
+            animator.SetBool("isFollow", true); // 추적 상태로 변경
         }
-       
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
+        if (agent != null)
+        {
+            agent.isStopped = true; // 이동 중지
+        }
     }
 
-    void ResetMovement()
+    private void ResetMovement()
     {
         moveTimer = moveDuration;
-        moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized; // 랜덤 방향 설정
+
+        // 현재 위치를 기준으로 일정 범위 내에서 랜덤 위치 선정
+        Vector2 randomOffset = new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
+        randomTarget = (Vector2)enemy.transform.position + randomOffset;
+
+        // NavMesh 이동 설정
+        if (agent != null)
+        {
+            agent.SetDestination(randomTarget);
+        }
     }
 }
-
