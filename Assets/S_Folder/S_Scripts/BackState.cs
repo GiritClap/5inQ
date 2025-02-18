@@ -23,7 +23,8 @@ public class BackState : StateMachineBehaviour
         else
         {
             enemy.DirectionEnemy(enemy.home.x, enemyTransform.position.x);
-            enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, enemy.home, Time.deltaTime * enemy.speed);
+            //enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, enemy.home, Time.deltaTime * enemy.speed);
+            enemy.Setup(enemy.home2.transform);
         }
     }
 

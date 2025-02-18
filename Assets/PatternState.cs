@@ -20,7 +20,7 @@ public class PatternState : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // 이동 타이머 감소
+       /* // 이동 타이머 감소
         moveTimer -= Time.deltaTime;
 
         // 적 이동
@@ -41,7 +41,7 @@ public class PatternState : StateMachineBehaviour
             animator.SetBool("isPattern", false);
             animator.SetBool("isFollow", true);// 추적 상태로 전환
         }
-       
+       */
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

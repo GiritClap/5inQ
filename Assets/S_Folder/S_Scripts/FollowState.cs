@@ -16,14 +16,16 @@ public class FollowState : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Vector2.Distance(enemy.player.position, enemyTransform.position) > enemy.distance)
+        if (Vector2.Distance(enemy.home2.transform.position, enemyTransform.position) > enemy.distance)
         {
             animator.SetBool("isBack", true);
             animator.SetBool("isFollow", false);
         }
         else if (Vector2.Distance(enemy.player.position, enemyTransform.position) > enemy.attackRange)
         {
-            enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, enemy.player.position, Time.deltaTime * enemy.speed);
+            //enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, enemy.player.position, Time.deltaTime * enemy.speed);
+            Debug.Log("¤¡¤¡");
+            enemy.Setup(enemy.player.transform);
         }
         else
         {

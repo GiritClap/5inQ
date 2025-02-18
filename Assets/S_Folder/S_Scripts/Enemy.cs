@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public enum EnemyType // 적 타입  선택
@@ -11,6 +12,10 @@ public enum EnemyType // 적 타입  선택
 }
 public class Enemy : MonoBehaviour
 {
+    private NavMeshAgent navMeshAgent;
+    private Transform target;
+    public GameObject home2;
+
 
     public GameObject cRocket;
 
@@ -72,6 +77,10 @@ public class Enemy : MonoBehaviour
         playerAttack = player.transform.GetComponent<M_PlayerAttack>();
         home = transform.position;
         atkDamage = 10;
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
+
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -143,23 +152,13 @@ public class Enemy : MonoBehaviour
         if (atkDelay >= 0)
             atkDelay -= Time.deltaTime;
 
-       
-        //Debug.Log(atkDamage);   01/23 문승준 추가 
+        if(target != null)
+        {
+            navMeshAgent.SetDestination(target.position); // 따라가기 코드
+
+        }
+
     }
-
-    /*
-    IEnumerator DestroyAfterAnimation()
-    {
-        // 애니메이션 상태를 가져옴
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        // 애니메이션의 길이만큼 대기
-        yield return new WaitForSeconds(stateInfo.length);
-
-        // 객체 삭제
-        Destroy(gameObject);
-    }
-    */
 
 
     public void LaunchCRocket()
@@ -222,5 +221,15 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // 애니메이션 길이만큼 기다림
         Destroy(gameObject);
+    }
+
+    public void Setup(Transform target)
+    {
+        this.target = target;
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
+
     }
 }

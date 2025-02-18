@@ -23,7 +23,6 @@ public class EnemyFSM : MonoBehaviour
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
 
-    
     }
 
     private void Update()
