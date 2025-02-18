@@ -10,6 +10,7 @@ public class BackState : StateMachineBehaviour
     {
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
+        //
     }
 
     
