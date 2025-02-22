@@ -14,7 +14,7 @@ public class C_DoorController : MonoBehaviour
 
     private void Start()
     {
-        /*GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
@@ -22,24 +22,13 @@ public class C_DoorController : MonoBehaviour
         else
         {
             Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다.");
-        }*/
+        }
     }
 
     private void Update()
     {
-        if (playerTransform == null || isAnimating) {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                playerTransform = player.transform;
-            }
-            else
-            {
-                return;
-            }
+        if (playerTransform == null || isAnimating)
             return;
-        }
-            
 
         float distance = Vector3.Distance(playerTransform.position, transform.position);
 
