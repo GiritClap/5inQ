@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 3874298005551197297}
   - component: {fileID: 7086679595575200754}
   - component: {fileID: 917438333900902671}
+  - component: {fileID: 9061922125082813263}
   - component: {fileID: 7929771605027878954}
   - component: {fileID: 5454670796016714644}
+  - component: {fileID: 7010473824801847518}
   m_Layer: 0
   m_Name: RobotA
   m_TagString: Enemy
@@ -137,6 +139,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &9061922125082813263
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5177916896600007265}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.9999999
+  m_Speed: 2.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 3.9999998
+  m_BaseOffset: 2
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &7929771605027878954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,10 +173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270d5b6c3301107469ceabb72d6b0ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  home2: {fileID: 0}
   cRocket: {fileID: 0}
   type: 0
   player: {fileID: 0}
-  speed: 4
+  speed: 1
   home: {x: 0, y: 0}
   enemyHp: 30
   atkCooltime: 2
@@ -209,6 +234,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &7010473824801847518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5177916896600007265}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d39af3803cb0d7d45b45f69bef61f5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nav: {fileID: 9061922125082813263}
+  targets:
+  - {fileID: 0}
+  - {fileID: 0}
+  point: 0
 --- !u!1 &7791823876348960171
 GameObject:
   m_ObjectHideFlags: 0
