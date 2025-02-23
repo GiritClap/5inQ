@@ -12,6 +12,9 @@ public enum EnemyType // 적 타입  선택
 }
 public class Enemy : MonoBehaviour
 {
+    private Rigidbody2D rb;
+
+
     private NavMeshAgent navMeshAgent;
     private Transform target;
     public GameObject home2;
@@ -43,7 +46,7 @@ public class Enemy : MonoBehaviour
     M_PlayerHealth playerHp;
     M_PlayerAttack playerAttack;
 
-    public float invincibilityDuration = 0.2f; // 무적 지속 시간
+    public float invincibilityDuration = 100f; // 무적 지속 시간
     public float blinkInterval = 0.05f; // 깜빡이는 간격
 
     private bool isDead = false; // 적이 이미 죽었는지 체크
@@ -80,6 +83,7 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        rb = GetComponent<Rigidbody2D>();
 
     }
 
@@ -186,22 +190,31 @@ public class Enemy : MonoBehaviour
     void OnDamaged(float atkDmg)
     {
         Debug.Log("피격!");
+
         enemyHp -= atkDmg;
 
-        if (enemyHp <= 0 && !isDead) // 중복 처리 방지
+        if (enemyHp <= 0 && !isDead)
         {
             isDead = true;
             animator.SetTrigger("Die");
             StartCoroutine(DestroyAfterAnimation());
         }
-        else
+        else if (enemyHp > 0)
         {
-            StartCoroutine(InvincibilityCoroutine()); // 무적 & 깜빡이는 효과 시작
+            animator.SetTrigger("Damage");
+
+            // 넉백 적용 (NavMesh 사용을 고려)
+            StartCoroutine(KnockbackRoutine());
+
+            StartCoroutine(InvincibilityCoroutine());
         }
     }
 
+
+
     private IEnumerator InvincibilityCoroutine()
     {
+
         isInvincible = true; // 무적 활성화
 
         float elapsed = 0f;
@@ -232,4 +245,27 @@ public class Enemy : MonoBehaviour
         navMeshAgent.updateUpAxis = false;
 
     }
+
+    private IEnumerator KnockbackRoutine()
+    {
+        if (navMeshAgent != null)
+            navMeshAgent.enabled = false; // 넉백 중 NavMeshAgent 비활성화
+
+        Vector2 knockbackDir = (transform.position - player.position).normalized;
+        float knockbackForce = 5f;
+
+        float knockbackTime = 0.2f; // 넉백 지속 시간
+        float timer = 0f;
+
+        while (timer < knockbackTime)
+        {
+            transform.position += (Vector3)(knockbackDir * knockbackForce * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        if (navMeshAgent != null)
+            navMeshAgent.enabled = true; // 넉백 후 NavMeshAgent 다시 활성화
+    }
+
 }
