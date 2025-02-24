@@ -147,21 +147,31 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 01/23 문승준 추가 
-        if(player == null || playerHp == null)
+        if (player == null || playerHp == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerHp = player.GetComponent<M_PlayerHealth>();
         }
-        //
 
         if (atkDelay >= 0)
             atkDelay -= Time.deltaTime;
 
-        if(target != null)
-        {
-            navMeshAgent.SetDestination(target.position); // 따라가기 코드
+        // 플레이어와 적 사이 거리 계산
+        distance = Vector2.Distance(transform.position, player.position);
 
+        if (distance <= attackRange) // 공격 범위 안에 들어오면 공격
+        {
+            navMeshAgent.isStopped = true; // 이동 멈춤
+            if (atkDelay <= 0)
+            {
+                Attack();
+                atkDelay = atkCooltime; // 공격 쿨타임 적용
+            }
+        }
+        else // 공격 범위 밖이면 이동
+        {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(player.position);
         }
 
     }
@@ -240,15 +250,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Setup(Transform target)
-    {
-        this.target = target;
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.updateRotation = false;
-        navMeshAgent.updateUpAxis = false;
-
-    }
+    
 
     private IEnumerator KnockbackRoutine()
     {
@@ -277,4 +279,14 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(knockbackCooldown); // 넉백 후 일정 시간 기다림
         isKnockback = false; // 넉백 종료
         }
+
+    public void Setup(Transform target)
+    {
+        this.target = target;
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
+
     }
+}
