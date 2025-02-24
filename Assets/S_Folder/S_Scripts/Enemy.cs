@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    private bool isKnockback = false; // 넉백 중인지 체크
+    private float knockbackCooldown = 0.5f; // 넉백 후 쿨타임 (0.5초 동안 추가 넉백 방지)
 
     private NavMeshAgent navMeshAgent;
     private Transform target;
@@ -189,6 +191,8 @@ public class Enemy : MonoBehaviour
 
     void OnDamaged(float atkDmg)
     {
+        if (isKnockback) return; // 넉백 중이거나 쿨타임 동안 추가 넉백 방지
+
         Debug.Log("피격!");
 
         enemyHp -= atkDmg;
@@ -203,7 +207,7 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Damage");
 
-            // 넉백 적용 (NavMesh 사용을 고려)
+            // 넉백 실행 (쿨타임 적용됨)
             StartCoroutine(KnockbackRoutine());
 
             StartCoroutine(InvincibilityCoroutine());
@@ -248,8 +252,11 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator KnockbackRoutine()
     {
+        if (isKnockback) yield break; // 이미 넉백 중이면 실행 X
+
+        isKnockback = true; // 넉백 시작
         if (navMeshAgent != null)
-            navMeshAgent.enabled = false; // 넉백 중 NavMeshAgent 비활성화
+            navMeshAgent.enabled = false; // 넉백 중 NavMesh 비활성화
 
         Vector2 knockbackDir = (transform.position - player.position).normalized;
         float knockbackForce = 5f;
@@ -265,7 +272,9 @@ public class Enemy : MonoBehaviour
         }
 
         if (navMeshAgent != null)
-            navMeshAgent.enabled = true; // 넉백 후 NavMeshAgent 다시 활성화
-    }
+            navMeshAgent.enabled = true; // 넉백 후 NavMesh 다시 활성화
 
-}
+        yield return new WaitForSeconds(knockbackCooldown); // 넉백 후 일정 시간 기다림
+        isKnockback = false; // 넉백 종료
+        }
+    }
