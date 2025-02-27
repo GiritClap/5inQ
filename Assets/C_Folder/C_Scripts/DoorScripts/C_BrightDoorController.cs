@@ -32,10 +32,12 @@ public class C_BrightDoorController : MonoBehaviour
 
         float distance = Vector3.Distance(playerTransform.position, transform.position);
 
-        if (distance <= activationDistance && !isDoorOpen)
+        // 플레이어가 문보다 아래에 있고, 문과의 거리가 기준 이하일 때 문을 연다.
+        if (distance <= activationDistance && !isDoorOpen && playerTransform.position.y < transform.position.y)
         {
             StartCoroutine(PlayAnimation(openDoorSprites, true));
         }
+        // 플레이어가 문을 벗어났거나 문이 이미 열려있을 때 문을 닫는다.
         else if (distance > activationDistance && isDoorOpen)
         {
             StartCoroutine(PlayAnimation(closeDoorSprites, false));
