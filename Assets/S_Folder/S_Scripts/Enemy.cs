@@ -87,6 +87,8 @@ public class Enemy : MonoBehaviour
         navMeshAgent.updateUpAxis = false;
         rb = GetComponent<Rigidbody2D>();
 
+        navMeshAgent.stoppingDistance = 1.3f; // 적과 플레이어 사이 일정 거리 유지
+
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -147,31 +149,21 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 01/23 문승준 추가 
         if (player == null || playerHp == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerHp = player.GetComponent<M_PlayerHealth>();
         }
+        //
 
         if (atkDelay >= 0)
             atkDelay -= Time.deltaTime;
 
-        // 플레이어와 적 사이 거리 계산
-        distance = Vector2.Distance(transform.position, player.position);
+        if (target != null)
+        {
+            navMeshAgent.SetDestination(target.position); // 따라가기 코드
 
-        if (distance <= attackRange) // 공격 범위 안에 들어오면 공격
-        {
-            navMeshAgent.isStopped = true; // 이동 멈춤
-            if (atkDelay <= 0)
-            {
-                Attack();
-                atkDelay = atkCooltime; // 공격 쿨타임 적용
-            }
-        }
-        else // 공격 범위 밖이면 이동
-        {
-            navMeshAgent.isStopped = false;
-            navMeshAgent.SetDestination(player.position);
         }
 
     }
