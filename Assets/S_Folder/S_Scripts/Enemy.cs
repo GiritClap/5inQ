@@ -12,6 +12,9 @@ public enum EnemyType // 적 타입  선택
 }
 public class Enemy : MonoBehaviour
 {
+
+    public Collider2D patrolArea;  // 패트롤 가능한 영역 추가
+
     private Rigidbody2D rb;
 
     private bool isKnockback = false; // 넉백 중인지 체크
@@ -75,6 +78,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        patrolArea = GameObject.FindGameObjectWithTag("PatrolArea").GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer 가져오기
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;

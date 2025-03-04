@@ -61,7 +61,19 @@ public class PatternState : StateMachineBehaviour
     void ResetMovement()
     {
         moveTimer = moveDuration;
-        moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized; // 랜덤 방향 설정
+
+        // 패트롤 영역 안에서만 이동하도록 제한
+        if (enemy.patrolArea != null)
+        {
+            Bounds bounds = enemy.patrolArea.bounds; // 패트롤 영역 크기 가져오기
+            float x = Random.Range(bounds.min.x, bounds.max.x);
+            float y = Random.Range(bounds.min.y, bounds.max.y);
+            moveDirection = (new Vector2(x, y) - (Vector2)enemyTransform.position).normalized; // 현재 위치에서 패트롤 영역 내 랜덤 위치로 이동
+        }
+        else
+        {
+            moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        }
     }
 }
 

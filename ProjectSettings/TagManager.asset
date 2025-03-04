@@ -10,6 +10,7 @@ TagManager:
   - Onefloor
   - Hide
   - Attack
+  - PatrolArea
   layers:
   - Default
   - TransparentFX
