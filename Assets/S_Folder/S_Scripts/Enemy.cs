@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
         playerAttack = player.transform.GetComponent<M_PlayerAttack>();
         home = transform.position;
         atkDamage = 10;
-        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         rb = GetComponent<Rigidbody2D>();
