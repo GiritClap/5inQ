@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 
-public enum EnemyType // Àû Å¸ÀÔ  ¼±ÅÃ
+public enum EnemyType // ì  íƒ€ì…  ì„ íƒ
 {
     RobotA,
     RobotB,
@@ -12,12 +12,12 @@ public enum EnemyType // Àû Å¸ÀÔ  ¼±ÅÃ
 }
 public class Enemy : MonoBehaviour
 {
-    public Collider2D patrolArea;  // ÆĞÆ®·Ñ °¡´ÉÇÑ ¿µ¿ª Ãß°¡
+    public Collider2D patrolArea;  // íŒ¨íŠ¸ë¡¤ ê°€ëŠ¥í•œ ì˜ì—­ ì¶”ê°€
 
     private Rigidbody2D rb;
 
-    private bool isKnockback = false; // ³Ë¹é ÁßÀÎÁö Ã¼Å©
-    private float knockbackCooldown = 0.5f; // ³Ë¹é ÈÄ ÄğÅ¸ÀÓ (0.5ÃÊ µ¿¾È Ãß°¡ ³Ë¹é ¹æÁö)
+    private bool isKnockback = false; // ë„‰ë°± ì¤‘ì¸ì§€ ì²´í¬
+    private float knockbackCooldown = 0.5f; // ë„‰ë°± í›„ ì¿¨íƒ€ì„ (0.5ì´ˆ ë™ì•ˆ ì¶”ê°€ ë„‰ë°± ë°©ì§€)
 
     private NavMeshAgent navMeshAgent;
     private Transform target;
@@ -50,11 +50,11 @@ public class Enemy : MonoBehaviour
     M_PlayerHealth playerHp;
     M_PlayerAttack playerAttack;
 
-    public float invincibilityDuration = 100f; // ¹«Àû Áö¼Ó ½Ã°£
-    public float blinkInterval = 0.05f; // ±ôºıÀÌ´Â °£°İ
+    public float invincibilityDuration = 100f; // ë¬´ì  ì§€ì† ì‹œê°„
+    public float blinkInterval = 0.05f; // ê¹œë¹¡ì´ëŠ” ê°„ê²©
 
-    private bool isDead = false; // ÀûÀÌ ÀÌ¹Ì Á×¾ú´ÂÁö Ã¼Å©
-    private bool isInvincible = false; // ¹«Àû »óÅÂ Ã¼Å©
+    private bool isDead = false; // ì ì´ ì´ë¯¸ ì£½ì—ˆëŠ”ì§€ ì²´í¬
+    private bool isInvincible = false; // ë¬´ì  ìƒíƒœ ì²´í¬
     private SpriteRenderer spriteRenderer;
     public void ChangeEnemy()
     {
@@ -78,20 +78,21 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         patrolArea = GameObject.FindGameObjectWithTag("PatrolArea").GetComponent<Collider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer °¡Á®¿À±â
+        spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer ê°€ì ¸ì˜¤ê¸°
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHp = player.GetComponent<M_PlayerHealth>();
         playerAttack = player.transform.GetComponent<M_PlayerAttack>();
         home = transform.position;
         atkDamage = 10;
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         rb = GetComponent<Rigidbody2D>();
+        
 
-        navMeshAgent.stoppingDistance = 1.3f; // Àû°ú ÇÃ·¹ÀÌ¾î »çÀÌ ÀÏÁ¤ °Å¸® À¯Áö
-
+        navMeshAgent.stoppingDistance = 1.3f; // ì ê³¼ í”Œë ˆì´ì–´ ì‚¬ì´ ì¼ì • ê±°ë¦¬ ìœ ì§€
+    
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -134,16 +135,6 @@ public class Enemy : MonoBehaviour
                 Debug.Log("damage" + atkDamage);
                 playerHp.GetDamage(atkDamage);
 
-                //Debug.Log("B Die launched!"); 
-
-                /*
-                // B °ø°İ
-                if (type == EnemyType.RobotB)
-                {
-                    animator.SetTrigger("Die");
-                    StartCoroutine(DestroyAfterAnimation());  // ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³­ ÈÄ °´Ã¼ »èÁ¦
-                }
-                */
 
                 
             }
@@ -152,7 +143,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 01/23 ¹®½ÂÁØ Ãß°¡ 
+         if (navMeshAgent == null)
+         {
+             Debug.LogError("âŒ NavMeshAgentê°€ ì‹¤í–‰ ë„ì¤‘ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤!");
+         }
+        
+        // 01/23 ë¬¸ìŠ¹ì¤€ ì¶”ê°€ 
         if (player == null || playerHp == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -165,7 +161,7 @@ public class Enemy : MonoBehaviour
 
         if (target != null)
         {
-            navMeshAgent.SetDestination(target.position); // µû¶ó°¡±â ÄÚµå
+            navMeshAgent.SetDestination(target.position); // ë”°ë¼ê°€ê¸° ì½”ë“œ
 
         }
 
@@ -175,20 +171,20 @@ public class Enemy : MonoBehaviour
     public void LaunchCRocket()
     {
         
-        // ·ÎÄÏ »ı¼º
+        // ë¡œì¼“ ìƒì„±
         GameObject rocket = Instantiate(cRocket, transform.position, Quaternion.identity);
 
        
     }
 
-    public void ObjectDestoy() //  ½Å¾Ö¸® Ãß°¡
+    public void ObjectDestoy() //  ì‹ ì• ë¦¬ ì¶”ê°€
     {
         Destroy(animator.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Attack") && !isDead && !isInvincible) // ¹«Àû ¾Æ´Ò ¶§¸¸ ÇÇ°İ
+        if (collision.CompareTag("Attack") && !isDead && !isInvincible) // ë¬´ì  ì•„ë‹ ë•Œë§Œ í”¼ê²©
         {
             OnDamaged(playerAttack.atkDmg);
         }
@@ -196,9 +192,9 @@ public class Enemy : MonoBehaviour
 
     void OnDamaged(float atkDmg)
     {
-        if (isKnockback) return; // ³Ë¹é ÁßÀÌ°Å³ª ÄğÅ¸ÀÓ µ¿¾È Ãß°¡ ³Ë¹é ¹æÁö
+        if (isKnockback) return; // ë„‰ë°± ì¤‘ì´ê±°ë‚˜ ì¿¨íƒ€ì„ ë™ì•ˆ ì¶”ê°€ ë„‰ë°± ë°©ì§€
 
-        Debug.Log("ÇÇ°İ!");
+        Debug.Log("í”¼ê²©!");
 
         enemyHp -= atkDmg;
 
@@ -212,7 +208,7 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Damage");
 
-            // ³Ë¹é ½ÇÇà (ÄğÅ¸ÀÓ Àû¿ëµÊ)
+            // ë„‰ë°± ì‹¤í–‰ (ì¿¨íƒ€ì„ ì ìš©ë¨)
             StartCoroutine(KnockbackRoutine());
 
             StartCoroutine(InvincibilityCoroutine());
@@ -224,24 +220,24 @@ public class Enemy : MonoBehaviour
     private IEnumerator InvincibilityCoroutine()
     {
 
-        isInvincible = true; // ¹«Àû È°¼ºÈ­
+        isInvincible = true; // ë¬´ì  í™œì„±í™”
 
         float elapsed = 0f;
         while (elapsed < invincibilityDuration)
         {
-            spriteRenderer.color = new Color(1f, 0f, 0f, 1f); // »¡°­ »ö
+            spriteRenderer.color = new Color(1f, 0f, 0f, 1f); // ë¹¨ê°• ìƒ‰
             yield return new WaitForSeconds(blinkInterval);
-            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // ¿ø·¡ »ö
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f); // ì›ë˜ ìƒ‰
             yield return new WaitForSeconds(blinkInterval);
             elapsed += blinkInterval * 2;
         }
 
-        isInvincible = false; // ¹«Àû ÇØÁ¦
+        isInvincible = false; // ë¬´ì  í•´ì œ
     }
 
     private IEnumerator DestroyAfterAnimation()
     {
-        yield return new WaitForSeconds(0.5f); // ¾Ö´Ï¸ŞÀÌ¼Ç ±æÀÌ¸¸Å­ ±â´Ù¸²
+        yield return new WaitForSeconds(0.5f); // ì• ë‹ˆë©”ì´ì…˜ ê¸¸ì´ë§Œí¼ ê¸°ë‹¤ë¦¼
         Destroy(gameObject);
     }
 
@@ -249,16 +245,16 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator KnockbackRoutine()
     {
-        if (isKnockback) yield break; // ÀÌ¹Ì ³Ë¹é ÁßÀÌ¸é ½ÇÇà X
+        if (isKnockback) yield break; // ì´ë¯¸ ë„‰ë°± ì¤‘ì´ë©´ ì‹¤í–‰ X
 
-        isKnockback = true; // ³Ë¹é ½ÃÀÛ
+        isKnockback = true; // ë„‰ë°± ì‹œì‘
         if (navMeshAgent != null)
-            navMeshAgent.enabled = false; // ³Ë¹é Áß NavMesh ºñÈ°¼ºÈ­
+            navMeshAgent.enabled = false; // ë„‰ë°± ì¤‘ NavMesh ë¹„í™œì„±í™”
 
         Vector2 knockbackDir = (transform.position - player.position).normalized;
         float knockbackForce = 5f;
 
-        float knockbackTime = 0.2f; // ³Ë¹é Áö¼Ó ½Ã°£
+        float knockbackTime = 0.2f; // ë„‰ë°± ì§€ì† ì‹œê°„
         float timer = 0f;
 
         while (timer < knockbackTime)
@@ -269,10 +265,10 @@ public class Enemy : MonoBehaviour
         }
 
         if (navMeshAgent != null)
-            navMeshAgent.enabled = true; // ³Ë¹é ÈÄ NavMesh ´Ù½Ã È°¼ºÈ­
+            navMeshAgent.enabled = true; // ë„‰ë°± í›„ NavMesh ë‹¤ì‹œ í™œì„±í™”
 
-        yield return new WaitForSeconds(knockbackCooldown); // ³Ë¹é ÈÄ ÀÏÁ¤ ½Ã°£ ±â´Ù¸²
-        isKnockback = false; // ³Ë¹é Á¾·á
+        yield return new WaitForSeconds(knockbackCooldown); // ë„‰ë°± í›„ ì¼ì • ì‹œê°„ ê¸°ë‹¤ë¦¼
+        isKnockback = false; // ë„‰ë°± ì¢…ë£Œ
         }
 
     public void Setup(Transform target)
