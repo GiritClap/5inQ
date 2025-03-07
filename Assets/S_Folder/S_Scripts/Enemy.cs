@@ -12,7 +12,6 @@ public enum EnemyType // 적 타입  선택
 }
 public class Enemy : MonoBehaviour
 {
-
     public Collider2D patrolArea;  // 패트롤 가능한 영역 추가
 
     private Rigidbody2D rb;
