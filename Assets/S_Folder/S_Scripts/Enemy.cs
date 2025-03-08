@@ -72,12 +72,29 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public Vector2 moveDirection;  // 개별 이동 방향 저장
+
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        patrolArea = GameObject.FindGameObjectWithTag("PatrolArea").GetComponent<Collider2D>();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("NavMeshAgent not found!");
+        }
+
+        // NavMeshAgent가 비활성화 되어있지 않도록 확인
+        navMeshAgent.enabled = true; // 비활성화 되어있다면 활성화
+
+        // NavMeshAgent 업데이트에서 rotation과 upAxis 설정
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
+        patrolArea = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer 가져오기
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -89,10 +106,10 @@ public class Enemy : MonoBehaviour
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         rb = GetComponent<Rigidbody2D>();
-        
+
 
         navMeshAgent.stoppingDistance = 1.3f; // 적과 플레이어 사이 일정 거리 유지
-    
+
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -110,7 +127,7 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        
+
 
         if (animator.GetFloat("Direction") == -1)
         {
@@ -123,7 +140,7 @@ public class Enemy : MonoBehaviour
                 boxpos.localPosition = new Vector2(Mathf.Abs(boxpos.localPosition.x), boxpos.localPosition.y);
         }
 
-        
+
 
 
 
@@ -136,18 +153,18 @@ public class Enemy : MonoBehaviour
                 playerHp.GetDamage(atkDamage);
 
 
-                
+
             }
         }
     }
     // Update is called once per frame
     void Update()
     {
-         if (navMeshAgent == null)
-         {
-             Debug.LogError("❌ NavMeshAgent가 실행 도중 삭제되었습니다!");
-         }
-        
+        if (navMeshAgent == null)
+        {
+            Debug.LogError("❌ NavMeshAgent가 실행 도중 삭제되었습니다!");
+        }
+
         // 01/23 문승준 추가 
         if (player == null || playerHp == null)
         {
@@ -170,11 +187,11 @@ public class Enemy : MonoBehaviour
 
     public void LaunchCRocket()
     {
-        
+
         // 로켓 생성
         GameObject rocket = Instantiate(cRocket, transform.position, Quaternion.identity);
 
-       
+
     }
 
     public void ObjectDestoy() //  신애리 추가
@@ -241,7 +258,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
+
 
     private IEnumerator KnockbackRoutine()
     {
@@ -269,7 +286,7 @@ public class Enemy : MonoBehaviour
 
         yield return new WaitForSeconds(knockbackCooldown); // 넉백 후 일정 시간 기다림
         isKnockback = false; // 넉백 종료
-        }
+    }
 
     public void Setup(Transform target)
     {
