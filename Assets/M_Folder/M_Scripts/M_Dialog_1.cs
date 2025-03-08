@@ -9,7 +9,7 @@ public class M_Dialog_1 : M_Dialog
 
     protected override void Start()
     {
-        base.Start();
+        M_DialogManager.Instance.StartDialogPanel();
         // panel1의 초기 위치를 설정 (y=100)
         panel1.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 100f);
         panel2.SetActive(false);
@@ -21,15 +21,15 @@ public class M_Dialog_1 : M_Dialog
         switch (M_DialogManager.Instance.GetDialogQueueCnt())
         {
             case 0:
-                bgIndex = 1;
-                charIndex = 3;
-                charName = "Char_3";
+                bgIndex = 0;
+                charIndex = 1;
+                charName = "Char_1";
                 charOrder = 1;
                 break;
             case 1:
-                bgIndex = 1;
-                charIndex = 2;
-                charName = "Char_2";
+                bgIndex = 0;
+                charIndex = 0;
+                charName = "Char_0";
                 charOrder = 0;
                 break;
             case 2:
@@ -70,5 +70,7 @@ public class M_Dialog_1 : M_Dialog
         // 끝 위치에 정확히 도달
         //panelRect.anchoredPosition = endPos;
         panel2.SetActive(true);  // 이동이 끝나면 panel2 활성화
+        base.Start();
+
     }
 }

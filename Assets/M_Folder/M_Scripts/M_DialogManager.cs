@@ -43,6 +43,11 @@ public class M_DialogManager : MonoBehaviour
         char_2.gameObject.SetActive(false);
     }
 
+    public void StartDialogPanel()
+    {
+        dialogPanel.SetActive(true);
+    }
+
     // 대화를 시작하는 메서드
     public void StartDialog(List<string> dialogLines, string name)
     {
@@ -52,7 +57,7 @@ public class M_DialogManager : MonoBehaviour
         {
             dialogQueue.Enqueue(line);
         }
-        dialogPanel.SetActive(true);
+        //dialogPanel.SetActive(true);
         char_1.gameObject.SetActive(true);
         char_2.gameObject.SetActive(false);
 
