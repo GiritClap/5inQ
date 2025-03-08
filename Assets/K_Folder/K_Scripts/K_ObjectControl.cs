@@ -8,14 +8,21 @@ public class K_ObjectControl : MonoBehaviour
     public GameObject itemPrefab;  // 드랍될 아이템 프리팹
     public Transform dropPoint;    // 아이템이 드랍될 위치
     public GameObject interactionUI; // "상호작용 가능" UI (Canvas의 Text)
+    public Text cardKeyUI;  // 카드키 UI 텍스트
 
     private bool isPlayerNearby = false;
+    private string cardKey = "";  // 카드키 정보 저장
 
     void Start()
     {
         if (interactionUI != null)
         {
             interactionUI.SetActive(false); // 처음에는 UI를 숨김
+        }
+
+        if (cardKeyUI != null)
+        {
+            cardKeyUI.text = "Card Key: None";  // 시작 시 카드키 정보 초기화
         }
     }
 
@@ -33,6 +40,25 @@ public class K_ObjectControl : MonoBehaviour
         {
             Instantiate(itemPrefab, dropPoint.position, Quaternion.identity);
             Debug.Log("아이템 드랍!");
+
+            // G키를 눌렀을 때 UI 숨기기
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(false);
+            }
+        }
+    }
+
+    private void AcquireCardKey(string newCardKey)
+    {
+        // 카드키를 획득했을 때
+        cardKey = newCardKey;
+        Debug.Log("Card Key Acquired: " + cardKey);
+
+        // UI에 카드키 정보 업데이트
+        if (cardKeyUI != null)
+        {
+            cardKeyUI.text = "Card Key: " + cardKey;
         }
     }
 
