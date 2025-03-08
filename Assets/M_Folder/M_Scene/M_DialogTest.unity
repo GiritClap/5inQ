@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 1640208841}
     - target: {fileID: 2687017090487604059, guid: b6a82e0f68160154686fad3b182d6464, type: 3}
       propertyPath: nextSceneName
-      value: S_FirstScene_Test
+      value: S_FirstScene_0
       objectReference: {fileID: 0}
     - target: {fileID: 2868012598562297089, guid: b6a82e0f68160154686fad3b182d6464, type: 3}
       propertyPath: m_AnchoredPosition.y
