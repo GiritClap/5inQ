@@ -221,7 +221,7 @@ public class Enemy : MonoBehaviour
         {
             isDead = true;
             animator.SetTrigger("Die");
-            StartCoroutine(DestroyAfterAnimation());
+            //StartCoroutine(DestroyAfterAnimation());
         }
         else if (enemyHp > 0)
         {
@@ -254,11 +254,11 @@ public class Enemy : MonoBehaviour
         isInvincible = false; // 무적 해제
     }
 
-    private IEnumerator DestroyAfterAnimation()
+    /*private IEnumerator DestroyAfterAnimation()
     {
         yield return new WaitForSeconds(0.5f); // 애니메이션 길이만큼 기다림
         Destroy(gameObject);
-    }
+    }*/
 
 
 

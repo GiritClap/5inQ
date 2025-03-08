@@ -218,3 +218,10 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.78333336
+    functionName: ObjectDestoy
+    data: 
+    objectReferenceParameter: {fileID: 5177916896600007265, guid: 5d23a2cdbbda09043b52bd5bc2f93077, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
