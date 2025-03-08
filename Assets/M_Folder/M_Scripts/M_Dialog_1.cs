@@ -16,6 +16,14 @@ public class M_Dialog_1 : M_Dialog
         StartCoroutine(MovePanel());
     }
 
+    protected override void Update()
+    {
+        if(panel2.activeSelf)
+        {
+            base.Update();
+        }
+    }
+
     protected override void GetDialogState(out int bgIndex, out int charIndex, out string charName, out int charOrder)
     {
         switch (M_DialogManager.Instance.GetDialogQueueCnt())

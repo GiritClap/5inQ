@@ -11,12 +11,14 @@ public class M_FirstSceneManager : MonoBehaviour
     [Header("Player")]
     public GameObject[] player;
     public GameObject playerSpawnPos;
-
+/*
     [Header("Enemy")]
     public GameObject[] enemy;
     public GameObject[] aSpawnPos;
     public GameObject[] bSpawnPos;
     public GameObject[] cSpawnPos;
+*/
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,7 @@ public class M_FirstSceneManager : MonoBehaviour
         //SpawnEnemy();
     }
 
-    
+/*    
     void SpawnEnemy()
     {
         for(int i = 0; i < aSpawnPos.Length; i++)
@@ -55,7 +57,7 @@ public class M_FirstSceneManager : MonoBehaviour
         {
             Instantiate(enemy[2], cSpawnPos[i].transform.position, Quaternion.identity);
         }
-    }
+    }*/
   
    
 }
