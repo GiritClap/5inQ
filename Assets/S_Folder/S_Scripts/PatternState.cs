@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,71 +9,97 @@ public class PatternState : StateMachineBehaviour
     //Patrol patrol;
 
 
-    float moveTimer;       // ÀÌµ¿ ½Ã°£ Å¸ÀÌ¸Ó
-    Vector2 moveDirection; // ·£´ı ÀÌµ¿ ¹æÇâ
-    float moveDuration = 2f; // ÀÌµ¿ Áö¼Ó ½Ã°£ (ÃÊ ´ÜÀ§)
+    float moveTimer;       // ì´ë™ ì‹œê°„ íƒ€ì´ë¨¸
+    Vector2 moveDirection; // ëœë¤ ì´ë™ ë°©í–¥
+    float moveDuration = 2f; // ì´ë™ ì§€ì† ì‹œê°„ (ì´ˆ ë‹¨ìœ„)
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
         //patrol = patrol.GetComponent<Patrol>();
         enemyTransform = animator.GetComponent<Transform>();
-        
-        //ResetMovement(); // ÃÊ±â ·£´ı ¹æÇâ ¼³Á¤
+
+        //ResetMovement(); // ì´ˆê¸° ëœë¤ ë°©í–¥ ì„¤ì •
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // ÀÌµ¿ Å¸ÀÌ¸Ó °¨¼Ò
         moveTimer -= Time.deltaTime;
 
-        // Àû ÀÌµ¿
+        // âœ… ì´ë™í•˜ê¸° ì „ì— í…Œë‘ë¦¬ ì²´í¬
+        CheckBoundary();
+
+        // ì  ì´ë™
         enemyTransform.Translate(moveDirection * enemy.speed * Time.deltaTime);
 
-        // ¹æÇâ ¼³Á¤¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌÅÍ¿¡ Àü´Ş
         enemy.DirectionEnemy(enemyTransform.position.x + moveDirection.x, enemyTransform.position.x);
 
-        // ÀÌµ¿ ½Ã°£ÀÌ ³¡³µÀ¸¸é »õ·Î¿î ¹æÇâ ¼³Á¤
         if (moveTimer <= 0)
         {
             ResetMovement();
         }
 
-        // ÇÃ·¹ÀÌ¾î°¡ °¡±î¿öÁö¸é ÃßÀû »óÅÂ·Î ÀüÈ¯
-
-        //patrol.nav.destination = patrol.targets[patrol.point].transform.position;
-        //patrol.point = (patrol.point + 1) % patrol.targets.Length;
-        //patrol.next();
-
         if (Vector2.Distance(enemyTransform.position, enemy.player.position) <= enemy.distance)
         {
             animator.SetBool("isPattern", false);
-            animator.SetBool("isFollow", true);// ÃßÀû »óÅÂ·Î ÀüÈ¯
+            animator.SetBool("isFollow", true);
         }
-
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       
+
     }
 
     void ResetMovement()
     {
         moveTimer = moveDuration;
 
-        // ÆĞÆ®·Ñ ¿µ¿ª ¾È¿¡¼­¸¸ ÀÌµ¿ÇÏµµ·Ï Á¦ÇÑ
         if (enemy.patrolArea != null)
         {
-            Bounds bounds = enemy.patrolArea.bounds; // ÆĞÆ®·Ñ ¿µ¿ª Å©±â °¡Á®¿À±â
-            float x = Random.Range(bounds.min.x, bounds.max.x);
-            float y = Random.Range(bounds.min.y, bounds.max.y);
-            moveDirection = (new Vector2(x, y) - (Vector2)enemyTransform.position).normalized; // ÇöÀç À§Ä¡¿¡¼­ ÆĞÆ®·Ñ ¿µ¿ª ³» ·£´ı À§Ä¡·Î ÀÌµ¿
+            Bounds bounds = enemy.patrolArea.bounds;
+
+            // ëœë¤ ìœ„ì¹˜ ì„¤ì • (íŒ¨íŠ¸ë¡¤ ì˜ì—­ ë‚´)
+            Vector2 randomPoint = new Vector2(
+                Random.Range(bounds.min.x, bounds.max.x),
+                Random.Range(bounds.min.y, bounds.max.y)
+            );
+
+            // ì´ë™ ë°©í–¥ ì„¤ì •
+            moveDirection = (randomPoint - (Vector2)enemyTransform.position).normalized;
+
+            if (moveDirection == Vector2.zero)
+            {
+                moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+            }
         }
         else
         {
             moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
         }
     }
-}
 
+    // âœ… íŒ¨íŠ¸ë¡¤ ì§€ì—­ ë²—ì–´ë‚˜ë©´ ë°©í–¥ ë°˜ëŒ€ë¡œ ë°”ê¾¸ê¸°
+    void CheckBoundary()
+    {
+        if (enemy.patrolArea != null)
+        {
+            Bounds bounds = enemy.patrolArea.bounds;
+            Vector2 nextPosition = (Vector2)enemyTransform.position + moveDirection * enemy.speed * Time.deltaTime;
+
+            // Xì¶• ë²”ìœ„ ì²´í¬
+            if (nextPosition.x < bounds.min.x || nextPosition.x > bounds.max.x)
+            {
+                moveDirection.x *= -1; // ë°˜ëŒ€ ë°©í–¥ ì´ë™
+            }
+
+            // Yì¶• ë²”ìœ„ ì²´í¬
+            if (nextPosition.y < bounds.min.y || nextPosition.y > bounds.max.y)
+            {
+                moveDirection.y *= -1; // ë°˜ëŒ€ ë°©í–¥ ì´ë™
+            }
+        }
+    }
+
+    
+}
