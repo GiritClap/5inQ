@@ -299,4 +299,9 @@ public class Enemy : MonoBehaviour
         navMeshAgent.updateUpAxis = false;
 
     }
+
+    public void SetDestinationOff()
+    {
+        navMeshAgent.enabled = false;
+    }
 }
