@@ -2848,7 +2848,7 @@ MonoBehaviour:
   level: 0
   powerGauge: {fileID: 3381397705365866737}
   fillColor: {fileID: 5095481023828059800}
-  atkDmg: 10
+  atkDmg: 1
 --- !u!50 &-4425151779455755565
 Rigidbody2D:
   serializedVersion: 4

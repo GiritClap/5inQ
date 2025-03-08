@@ -170,6 +170,8 @@ public class Enemy : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             playerHp = player.GetComponent<M_PlayerHealth>();
+            playerAttack = player.transform.GetComponent<M_PlayerAttack>();
+
         }
         //
 

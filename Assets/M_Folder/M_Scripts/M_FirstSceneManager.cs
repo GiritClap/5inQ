@@ -35,7 +35,7 @@ public class M_FirstSceneManager : MonoBehaviour
 
         }
 
-        SpawnEnemy();
+        //SpawnEnemy();
     }
 
     

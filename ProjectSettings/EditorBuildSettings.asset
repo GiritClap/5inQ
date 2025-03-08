@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/C_Folder/C_Scene/BlueMapScene.unity
     guid: 89c8828fc78513c499f6a34c38553cc0
+  - enabled: 1
+    path: Assets/S_Folder/S_Scene/S_FirstScene_Test.unity
+    guid: 439b496b32a4b3b4494d197e3a5bbaad
   m_configObjects: {}

@@ -12,7 +12,7 @@ public class M_IdCardItem : MonoBehaviour
         activator = GameObject.FindGameObjectWithTag("Player").GetComponent<M_IdCardActivator>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) // 플레이어가 아이템을 줍는 경우
         {
@@ -20,4 +20,6 @@ public class M_IdCardItem : MonoBehaviour
             Destroy(gameObject); // 아이템 삭제
         }
     }
+
+  
 }
