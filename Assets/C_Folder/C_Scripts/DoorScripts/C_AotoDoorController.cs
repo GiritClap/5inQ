@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class C_BrightDoorController : MonoBehaviour
+public class C_AotoDoorController : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer; // 문 스프라이트 렌더러
     public Sprite[] openDoorSprites;      // 문이 열리는 애니메이션 스프라이트
